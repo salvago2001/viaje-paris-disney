@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>💶 Financiero — París & Disney 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+<script src="data.js"></script>
+<style>
+:root{--navy:#0c1e5e;--gold:#f5a623;--gold-dim:rgba(245,166,35,.3);--light:#F3F8FF;--text:#0a1850;--muted:rgba(10,24,80,.6);--faint:rgba(10,24,80,.38)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Montserrat',sans-serif;background:var(--light);color:var(--text);overflow-x:hidden}
+
+/* HEADER */
+#hdr{position:sticky;top:0;z-index:900;background:rgba(8,18,65,.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--gold-dim)}
+.hdr-in{max-width:1200px;margin:0 auto;padding:0 1.5rem;height:64px;display:flex;align-items:center;gap:1.5rem}
+.logo{text-decoration:none;display:flex;align-items:center;flex-shrink:0}
+.logo img{max-width:150px;height:auto;display:block}
+.logo-txt{font-weight:900;font-size:1rem;color:var(--gold);letter-spacing:.5px}
+.logo-txt em{color:#fff;font-style:normal}
+.back{display:inline-flex;align-items:center;gap:.5rem;color:rgba(255,255,255,.7);text-decoration:none;font-size:.875rem;font-weight:700;padding:.4rem .8rem;border-radius:6px;transition:all .2s;margin-right:.5rem}
+.back:hover{color:var(--gold);background:rgba(245,166,35,.1)}
+.hdr-date{margin-left:auto;font-size:.8rem;color:var(--gold);opacity:.8;font-weight:700;white-space:nowrap}
+
+/* HERO financiero */
+.fin-hero{background:linear-gradient(135deg,#08163d,#001b6e);color:#fff;padding:3rem 1.5rem 2.5rem;text-align:center}
+.fin-hero .slbl{font-size:.72rem;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;font-weight:700}
+.fin-hero h1{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;margin-bottom:.4rem}
+.fin-hero .sub{color:rgba(255,255,255,.6);font-size:.95rem}
+.gline{width:48px;height:2px;background:var(--gold);margin:.8rem auto}
+
+/* LAYOUT */
+.cnt{max-width:1100px;margin:0 auto;padding:0 1.5rem}
+
+/* TABS */
+.ftabs{display:flex;gap:.45rem;flex-wrap:wrap;justify-content:center;padding:1.8rem 1.5rem 0;max-width:1100px;margin:0 auto}
+.ftab{background:rgba(255,255,255,.7);border:1px solid rgba(10,24,80,.15);color:var(--muted);font-size:.8rem;font-weight:800;letter-spacing:.6px;padding:.55rem 1.1rem;border-radius:25px;cursor:pointer;transition:all .2s;font-family:'Montserrat',sans-serif;text-transform:uppercase}
+.ftab:hover,.ftab.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.fpanel{display:none;padding:2rem 0 4rem}
+.fpanel.on{display:block}
+
+/* CARD */
+.card{background:#fff;border:1px solid rgba(10,24,80,.1);border-radius:14px;padding:1.6rem;margin-bottom:1.2rem;box-shadow:0 2px 12px rgba(10,24,80,.06)}
+.card h3{font-size:.88rem;font-weight:900;color:var(--navy);margin-bottom:1rem;letter-spacing:.8px;text-transform:uppercase;border-bottom:2px solid var(--gold);padding-bottom:.6rem}
+
+/* Summary */
+.sum-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:.9rem;margin-bottom:1.7rem}
+.sum-c{background:#fff;border:1px solid rgba(10,24,80,.1);border-radius:12px;padding:1.4rem;text-align:center;box-shadow:0 2px 10px rgba(10,24,80,.06)}
+.sum-c .bn{font-size:1.75rem;font-weight:900;color:var(--navy);margin-bottom:.2rem}
+.sum-c .bl{font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--faint)}
+
+/* Table */
+.tbl{width:100%;border-collapse:collapse;font-size:.875rem}
+.tbl th{background:rgba(12,30,94,.07);color:var(--navy);font-weight:800;padding:.7rem .85rem;text-align:left;border-bottom:2px solid rgba(12,30,94,.12);font-size:.72rem;letter-spacing:1px;text-transform:uppercase}
+.tbl td{padding:.7rem .85rem;color:var(--text);border-bottom:1px solid rgba(10,24,80,.06)}
+.tbl tr:hover td{background:rgba(12,30,94,.03)}
+.tbl .am{font-weight:700;color:var(--navy)}
+.tbl .cob{color:#16a34a;font-weight:700}
+.tbl .pag{color:#dc2626;font-weight:700}
+
+/* Transfer */
+.xfer{display:flex;align-items:center;gap:.9rem;background:#fff;border:1px solid rgba(10,24,80,.1);border-radius:10px;padding:.9rem;margin-bottom:.6rem;font-size:.9rem;flex-wrap:wrap;box-shadow:0 1px 6px rgba(10,24,80,.05)}
+.xfer .fr{font-weight:700;color:#dc2626}
+.xfer .arr{color:var(--navy);font-size:1.1rem}
+.xfer .to{font-weight:700;color:#16a34a}
+.xfer .con{flex:1;font-size:.78rem;color:var(--faint)}
+.xfer .am{margin-left:auto;font-weight:900;font-size:1rem;color:var(--navy)}
+
+/* Itinerary */
+.iday{border-left:4px solid var(--gold);padding:.9rem 1.35rem;margin-bottom:1.3rem;background:#fff;border-radius:0 12px 12px 0;box-shadow:0 2px 10px rgba(10,24,80,.05)}
+.iday .dl{font-size:.72rem;font-weight:900;letter-spacing:3px;text-transform:uppercase;color:var(--navy);margin-bottom:.4rem}
+.arow{background:var(--light);border-radius:8px;padding:.7rem;margin-bottom:.4rem}
+.arow .at{font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:.2rem}
+.arow .ad{font-size:.8rem;color:var(--muted);line-height:1.5}
+.arow .ac{font-size:.78rem;font-weight:700;color:#c17e00;margin-top:.2rem}
+.arow .an{font-size:.72rem;color:rgba(12,30,94,.5);margin-top:.15rem}
+
+/* Reservas */
+.res-row{display:flex;gap:1rem;padding:.5rem 0;border-bottom:1px solid rgba(10,24,80,.07);font-size:.875rem;flex-wrap:wrap}
+.res-row:last-child{border-bottom:none}
+.res-lbl{color:var(--faint);font-weight:600;min-width:160px;flex-shrink:0}
+.res-val{color:var(--text);font-weight:500}
+
+/* Transport */
+.trow{display:grid;grid-template-columns:2fr 1fr 1fr;gap:.5rem;padding:.6rem .65rem;border-radius:8px;font-size:.83rem;margin-bottom:.38rem;background:var(--light)}
+.trow .tn{font-weight:700;color:var(--text)}
+.trow .tm{color:var(--muted)}
+.trow .tp{color:#c17e00;font-weight:700}
+.trow .tno{font-size:.75rem;color:var(--faint);grid-column:1/-1;margin-top:.2rem}
+.inforow{display:grid;grid-template-columns:1fr 2fr;gap:.5rem;padding:.55rem .65rem;border-radius:8px;font-size:.83rem;margin-bottom:.32rem;background:var(--light)}
+.inforow .il{font-weight:700;color:var(--navy)}
+.inforow .iv{color:var(--muted)}
+
+/* Checklist */
+.cl-cat{margin-bottom:1.8rem}
+.cl-cat-t{font-size:.72rem;letter-spacing:3px;text-transform:uppercase;font-weight:900;margin-bottom:.9rem;padding-bottom:.45rem;border-bottom:2px solid rgba(10,24,80,.1);color:var(--navy)}
+.cli{display:flex;align-items:flex-start;gap:.9rem;padding:.85rem 1rem;border-radius:10px;margin-bottom:.45rem;cursor:pointer;transition:background .2s;background:#fff;border:1px solid rgba(10,24,80,.08);box-shadow:0 1px 5px rgba(10,24,80,.04)}
+.cli:hover{background:rgba(12,30,94,.04)}
+.cli.done{opacity:.5}
+.chk{width:22px;height:22px;border:2px solid rgba(12,30,94,.25);border-radius:5px;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s;margin-top:2px;font-size:.75rem;font-weight:900}
+.cli.done .chk{background:#16a34a;border-color:#16a34a;color:#fff}
+.cl-cnt{flex:1}
+.cl-t{font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:.15rem}
+.cli.done .cl-t{text-decoration:line-through;color:var(--faint)}
+.cl-d{font-size:.78rem;color:var(--faint)}
+.cl-plz{font-size:.68rem;font-weight:800;color:var(--navy);background:rgba(12,30,94,.08);padding:.14rem .52rem;border-radius:10px;white-space:nowrap;align-self:flex-start;flex-shrink:0}
+.sync-b{display:inline-flex;align-items:center;gap:.4rem;font-size:.75rem;font-weight:700;padding:.3rem .75rem;border-radius:20px;margin-bottom:1.2rem}
+.sync-local{background:rgba(59,130,246,.1);color:#1d4ed8;border:1px solid rgba(59,130,246,.25)}
+.sync-on{background:rgba(22,163,74,.1);color:#15803d;border:1px solid rgba(22,163,74,.25)}
+.sdot{width:7px;height:7px;border-radius:50%;background:currentColor}
+
+/* FOOTER */
+footer{background:#08163d;border-top:1px solid var(--gold-dim);padding:2rem 1.5rem;text-align:center}
+footer .ft{font-size:.95rem;font-weight:900;color:var(--gold);margin-bottom:.3rem}
+footer a{color:rgba(245,166,35,.7);text-decoration:none;font-weight:700;font-size:.85rem}
+footer a:hover{color:var(--gold)}
+
+@media(max-width:750px){
+  .trow{grid-template-columns:1.5fr 1fr}
+  .res-lbl{min-width:115px}
+  .xfer .con{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header id="hdr">
+  <div class="hdr-in">
+    <a href="index.html" class="back">← Volver</a>
+    <a href="index.html" class="logo">
+      <img src="img/dlp-logo.png" alt="Disneyland Paris"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='inline'">
+      <span class="logo-txt" style="display:none">✨ PARÍS <em>&</em> DISNEY</span>
+    </a>
+    <span class="hdr-date">7–13 Sep 2026</span>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="fin-hero">
+  <div class="slbl">Gestión del Viaje</div>
+  <h1>💶 Financiero</h1>
+  <div class="gline"></div>
+  <p class="sub">Gastos · Reparto · Itinerario · Transporte · Reservas · Checklist</p>
+</div>
+
+<!-- TABS -->
+<div class="ftabs">
+  <button class="ftab on" onclick="setTab('resumen')">📊 Resumen</button>
+  <button class="ftab"    onclick="setTab('reparto')">💸 Reparto</button>
+  <button class="ftab"    onclick="setTab('itinerario')">📅 Itinerario</button>
+  <button class="ftab"    onclick="setTab('transporte')">🚇 Transporte</button>
+  <button class="ftab"    onclick="setTab('reservas')">📋 Reservas</button>
+  <button class="ftab"    onclick="setTab('checklist')">✅ Checklist</button>
+</div>
+
+<div class="cnt">
+  <div id="fp-resumen"    class="fpanel on"></div>
+  <div id="fp-reparto"    class="fpanel"></div>
+  <div id="fp-itinerario" class="fpanel"></div>
+  <div id="fp-transporte" class="fpanel"></div>
+  <div id="fp-reservas"   class="fpanel"></div>
+  <div id="fp-checklist"  class="fpanel"></div>
+</div>
+
+<footer>
+  <div class="ft">París &amp; Disneyland 2026</div>
+  <a href="index.html">← Volver a la página principal</a>
+</footer>
+
+<script>
+const eur=n=>n.toLocaleString('es-ES',{style:'currency',currency:'EUR'});
+const $=id=>document.getElementById(id);
+
+// ── RESUMEN ──────────────────────────────────────────────
+!function(){
+  const d=window.VIAJE_DATA;
+  $('fp-resumen').innerHTML=`
+    <div class="sum-grid">
+      <div class="sum-c"><div class="bn">${eur(d.meta.totalViaje)}</div><div class="bl">Total Viaje</div></div>
+      <div class="sum-c"><div class="bn">${d.meta.personas.length}</div><div class="bl">Personas</div></div>
+      <div class="sum-c"><div class="bn">930,90€</div><div class="bl">÷6 por persona (igual)</div></div>
+      <div class="sum-c"><div class="bn">873,17€</div><div class="bl">Niños (diferenciado)</div></div>
+    </div>
+    <div class="card"><h3>💳 Quién pagó qué</h3>
+      ${d.financiero.pagos.map(p=>`<div class="xfer">
+        <span style="font-size:1.3rem">${p.icon}</span>
+        <div><div style="font-weight:800;color:var(--navy)">${p.quien}</div><div style="font-size:.72rem;color:var(--faint)">${p.concepto}</div></div>
+        <span class="am">${eur(p.importe)}</span></div>`).join('')}
+    </div>
+    <div class="card"><h3>📋 Desglose de Gastos</h3>
+      ${d.financiero.gastos.map(g=>`
+        <div style="margin-bottom:1.2rem">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.6rem">
+            <span style="font-weight:900;color:var(--text);font-size:.95rem">${g.concepto}</span>
+            <span style="font-weight:900;color:var(--navy)">${eur(g.total)}</span>
+          </div>
+          <div style="font-size:.66rem;color:var(--faint);margin-bottom:.6rem">Ref: ${g.referencia}</div>
+          ${g.detalle.map(det=>`
+            <div style="display:flex;justify-content:space-between;padding:.38rem 0;border-top:1px solid rgba(10,24,80,.06);font-size:.83rem">
+              <span style="color:var(--muted)">${det.item}</span>
+              <span style="color:var(--text);font-weight:600">${eur(det.total)} <span style="color:var(--faint);font-size:.72rem">${det.nota}</span></span>
+            </div>`).join('')}
+        </div>`).join('<hr style="border:none;border-top:1px solid rgba(10,24,80,.07);margin:.9rem 0">')}
+    </div>`;
+}();
+
+// ── REPARTO ──────────────────────────────────────────────
+!function(){
+  const d=window.VIAJE_DATA;
+  const mk=r=>`<div class="card"><h3>${r.titulo}</h3>
+    <p style="font-size:.82rem;color:var(--faint);margin-bottom:1rem">${r.descripcion}</p>
+    <div style="overflow-x:auto"><table class="tbl">
+      <thead><tr><th>Persona</th><th>Pagado</th><th>Corresponde</th><th>Saldo</th></tr></thead>
+      <tbody>${r.personas.map(p=>`<tr>
+        <td style="font-weight:800">${p.nombre}</td>
+        <td class="am">${eur(p.pago)}</td><td class="am">${eur(p.corresponde)}</td>
+        <td class="${p.estado==='cobra'?'cob':'pag'}">${p.estado==='cobra'?'+':''}${eur(p.saldo)}<br><span style="font-size:.6rem;opacity:.6">${p.estado==='cobra'?'← cobra':'→ paga'}</span></td>
+      </tr>`).join('')}</tbody></table></div>
+    <div style="margin-top:1.4rem">
+      <div style="font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--navy);font-weight:900;margin-bottom:.7rem">Transferencias</div>
+      ${r.transferencias.map(t=>`<div class="xfer">
+        <span class="fr">${t.de}</span><span class="arr">→</span><span class="to">${t.a}</span>
+        <span class="con">${t.concepto}</span><span class="am">${eur(t.importe)}</span>
+      </div>`).join('')}
+    </div></div>`;
+  $('fp-reparto').innerHTML=mk(d.reparto.igual)+mk(d.reparto.diferenciado);
+}();
+
+// ── ITINERARIO ───────────────────────────────────────────
+!function(){
+  const d=window.VIAJE_DATA;
+  const cm={amber:'#d97706',blue:'#2563eb',purple:'#9333ea',red:'#dc2626',teal:'#0d9488',orange:'#ea580c'};
+  $('fp-itinerario').innerHTML=d.itinerario.map(day=>`
+    <div class="iday" style="border-left-color:${cm[day.color]||'var(--gold)'}">
+      <div class="dl">${day.dia} · ${day.etapa}</div>
+      ${day.actividades.map(a=>`<div class="arow">
+        <div class="at">${a.titulo}</div>
+        <div class="ad">${a.detalles}</div>
+        ${a.coste&&a.coste!=='—'?`<div class="ac">${a.coste}</div>`:''}
+        ${a.notas?`<div class="an">💡 ${a.notas}</div>`:''}
+      </div>`).join('')}
+    </div>`).join('');
+}();
+
+// ── TRANSPORTE ───────────────────────────────────────────
+!function(){
+  const d=window.VIAJE_DATA;
+  $('fp-transporte').innerHTML=d.transporte.map(g=>`<div class="card"><h3>${g.titulo}</h3>
+    ${(g.tramos||[]).map(t=>`<div class="trow">
+      <div class="tn">${t.tramo}</div><div class="tm">${t.medio}</div><div class="tp">${t.total}</div>
+      ${t.nota?`<div class="tno">💡 ${t.nota}</div>`:''}
+    </div>`).join('')}
+    ${(g.info||[]).map(i=>`<div class="inforow"><div class="il">${i.label}</div><div class="iv">${i.valor}</div></div>`).join('')}
+  </div>`).join('');
+}();
+
+// ── RESERVAS ─────────────────────────────────────────────
+!function(){
+  const d=window.VIAJE_DATA;
+  $('fp-reservas').innerHTML=Object.values(d.reservas).map(r=>`<div class="card"><h3>${r.titulo}</h3>
+    ${r.datos.map(row=>`<div class="res-row">
+      <span class="res-lbl">${row.label}</span><span class="res-val">${row.valor}</span>
+    </div>`).join('')}
+  </div>`).join('');
+}();
+
+// ── CHECKLIST ────────────────────────────────────────────
+const SCRIPT_URL=(window.VIAJE_DATA&&window.VIAJE_DATA.APPS_SCRIPT_URL)||'';
+function loadState(){try{return JSON.parse(localStorage.getItem('cl2')||'{}')}catch{return{}}}
+function saveState(s){localStorage.setItem('cl2',JSON.stringify(s))}
+async function syncSheet(i,e){if(!SCRIPT_URL)return;try{await fetch(SCRIPT_URL,{method:'POST',body:JSON.stringify({index:i,estado:e})})}catch(x){}}
+
+function buildCL(){
+  const d=window.VIAJE_DATA,state=loadState();
+  const cats={
+    urgente:{l:'🚨 Urgente — Ya reservado',c:'#dc2626'},
+    proximo:{l:'📅 Próximo — Pendiente de acción',c:'#d97706'},
+    salir:  {l:'🧳 Antes de salir',c:'#2563eb'},
+    orly:   {l:'✈️ Al llegar a Orly',c:'#9333ea'},
+  };
+  const sb=SCRIPT_URL
+    ?'<span class="sync-b sync-on"><span class="sdot"></span>Sincronizando con Google Sheets</span>'
+    :'<span class="sync-b sync-local"><span class="sdot"></span>Guardado local · sin sync</span>';
+  let h=`<div style="text-align:center;margin-bottom:1rem">${sb}</div>
+    <p style="font-size:.82rem;color:var(--faint);text-align:center;margin-bottom:1.8rem">Haz clic para marcar como completada</p>`;
+  Object.entries(cats).forEach(([k,cat])=>{
+    const items=d.checklist.filter(c=>c.categoria===k);
+    if(!items.length)return;
+    h+=`<div class="cl-cat"><div class="cl-cat-t" style="color:${cat.c}">${cat.l}</div>
+      ${items.map(item=>{
+        const gi=d.checklist.indexOf(item);
+        const done=state[gi]==='confirmado'||item.estado==='confirmado';
+        return `<div class="cli${done?' done':''}" onclick="toggleCl(${gi})" data-gi="${gi}">
+          <div class="chk">${done?'✓':''}</div>
+          <div class="cl-cnt"><div class="cl-t">${item.tarea}</div><div class="cl-d">${item.detalle}</div></div>
+          <span class="cl-plz">${item.plazo}</span>
+        </div>`;
+      }).join('')}</div>`;
+  });
+  $('fp-checklist').innerHTML=h;
+}
+buildCL();
+
+function toggleCl(gi){
+  const state=loadState(),el=document.querySelector(`.cli[data-gi="${gi}"]`);
+  if(!el)return;
+  const done=el.classList.contains('done'),nuevo=done?'pendiente':'confirmado';
+  el.classList.toggle('done',!done);
+  el.querySelector('.chk').textContent=done?'':'✓';
+  state[gi]=nuevo;saveState(state);syncSheet(gi,nuevo);
+}
+
+// ── TABS ─────────────────────────────────────────────────
+function setTab(name){
+  const names=['resumen','reparto','itinerario','transporte','reservas','checklist'];
+  document.querySelectorAll('.ftab').forEach((t,i)=>t.classList.toggle('on',names[i]===name));
+  document.querySelectorAll('.fpanel').forEach(p=>p.classList.remove('on'));
+  $('fp-'+name).classList.add('on');
+  window.scrollTo({top:document.querySelector('.ftabs').offsetTop-80,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
