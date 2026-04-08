@@ -376,4 +376,7 @@ window.VIAJE_DATA = {
     { categoria: "orly",    tarea: "⭐ Premier Access Ratatouille",     detalle: "App DLP o taquilla Studios · Día 10 Sep al entrar", plazo: "Día 10 Sep",      estado: "pendiente" },
   ],
 
+  // ── APPS SCRIPT (sync checklist → Google Sheets) ────────────
+  APPS_SCRIPT_URL: "https://script.google.com/macros/s/AKfycbwlWSEgziueHJUTlArJpeu0esfuPPDJxj3O4MiaVxNOFhA0HusTkI0PxYnFe1FIAQ98jQ/exec",
+
 }; // ← FIN DE LOS DATOS DEL VIAJE
