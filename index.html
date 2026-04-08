@@ -1,645 +1,573 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Viaje París & Disney 2026</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            disney: { DEFAULT: '#1a237e', light: '#3949ab', dark: '#0d1257' }
-          }
-        }
-      }
-    }
-  </script>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-    * { font-family: 'Inter', sans-serif; }
-    .tab-btn { transition: all .2s; }
-    .tab-btn.active { background: #1a237e; color: white; }
-    .tab-btn:not(.active):hover { background: #e8eaf6; }
-    .section { display: none; }
-    .section.active { display: block; }
-    .fade-in { animation: fadeIn .3s ease; }
-    @keyframes fadeIn { from { opacity:0; transform:translateY(8px) } to { opacity:1; transform:translateY(0) } }
-    .card { transition: box-shadow .2s; }
-    .card:hover { box-shadow: 0 8px 30px rgba(0,0,0,.12); }
-    ::-webkit-scrollbar { width:6px; height:6px }
-    ::-webkit-scrollbar-track { background:#f1f1f1 }
-    ::-webkit-scrollbar-thumb { background:#c5cae9; border-radius:3px }
-    .progress-bar { background: linear-gradient(90deg, #4caf50, #81c784); }
-    .saldo-pos { color: #2e7d32; }
-    .saldo-neg { color: #c62828; }
-    @media (max-width:640px) { .hide-mobile { display:none } }
-  </style>
-</head>
-<body class="bg-slate-50 min-h-screen">
-
-<!-- DATA (cargada desde data.js) -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>✨ París & Disneyland 2026 — Familia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,300&display=swap" rel="stylesheet">
 <script src="data.js"></script>
+<style>
+:root{--navy:#001b6e;--navy-dark:#000d3d;--gold:#f5a623;--gold-dim:rgba(245,166,35,.32);--white:#fff;--muted:rgba(255,255,255,.55);--faint:rgba(255,255,255,.28)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Montserrat',sans-serif;background:var(--navy-dark);color:#fff;overflow-x:hidden}
 
-<!-- HEADER -->
-<header class="bg-gradient-to-r from-[#1a237e] to-[#3949ab] text-white shadow-lg sticky top-0 z-50">
-  <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-    <div>
-      <h1 class="text-lg font-bold leading-tight" id="header-title">Viaje París &amp; Disney 2026</h1>
-      <p class="text-xs text-blue-200 mt-0.5" id="header-fechas">7–13 Septiembre 2026 · 6 personas</p>
-    </div>
-    <div class="text-right hide-mobile">
-      <p class="text-xs text-blue-200">Total viaje</p>
-      <p class="text-xl font-bold" id="header-total">5.585,39€</p>
-    </div>
-  </div>
-  <!-- Tabs -->
-  <div class="max-w-6xl mx-auto px-2 pb-0">
-    <nav class="flex gap-1 overflow-x-auto pb-0 scrollbar-hide" id="nav">
-      <button data-tab="resumen"     class="tab-btn active whitespace-nowrap px-3 py-2 text-xs font-semibold rounded-t-lg">📊 Resumen</button>
-      <button data-tab="reparto"     class="tab-btn whitespace-nowrap px-3 py-2 text-xs font-semibold rounded-t-lg">💸 Reparto</button>
-      <button data-tab="itinerario"  class="tab-btn whitespace-nowrap px-3 py-2 text-xs font-semibold rounded-t-lg">📅 Itinerario</button>
-      <button data-tab="transporte"  class="tab-btn whitespace-nowrap px-3 py-2 text-xs font-semibold rounded-t-lg">🚇 Transporte</button>
-      <button data-tab="reservas"    class="tab-btn whitespace-nowrap px-3 py-2 text-xs font-semibold rounded-t-lg">📋 Reservas</button>
-      <button data-tab="disney"      class="tab-btn whitespace-nowrap px-3 py-2 text-xs font-semibold rounded-t-lg">🎢 Disney</button>
-      <button data-tab="checklist"   class="tab-btn whitespace-nowrap px-3 py-2 text-xs font-semibold rounded-t-lg">✅ Checklist</button>
+/* STARS */
+#stars{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.star{position:absolute;background:#fff;border-radius:50%;opacity:0;animation:twinkle var(--d) var(--delay) infinite ease-in-out}
+@keyframes twinkle{0%,100%{opacity:0}50%{opacity:.8}}
+
+/* HEADER */
+#hdr{position:fixed;top:0;left:0;right:0;z-index:900;background:linear-gradient(to bottom,rgba(0,10,50,.98),rgba(0,18,72,.92));backdrop-filter:blur(14px);border-bottom:1px solid var(--gold-dim);transition:transform .3s}
+.hdr-in{max-width:1200px;margin:0 auto;padding:0 1.5rem;height:62px;display:flex;align-items:center;gap:1.25rem}
+.logo{font-weight:900;font-size:1rem;color:var(--gold);text-decoration:none;letter-spacing:.5px;white-space:nowrap;flex-shrink:0}
+.logo em{color:#fff;font-style:normal}
+nav{display:flex;gap:.1rem;align-items:center;flex:1}
+.nl{color:rgba(255,255,255,.72);text-decoration:none;font-size:.72rem;font-weight:700;letter-spacing:.4px;padding:.36rem .68rem;border-radius:5px;transition:all .2s;white-space:nowrap}
+.nl:hover,.nl.on{color:var(--gold);background:rgba(245,166,35,.1)}
+.drp{position:relative}
+.drp>.nl::after{content:' ▾';font-size:.58rem}
+.dm{display:none;position:absolute;top:calc(100% + 5px);left:0;background:#000d3d;border:1px solid var(--gold-dim);border-radius:10px;min-width:185px;padding:.45rem 0;z-index:99}
+.drp:hover .dm{display:block}
+.di{display:block;padding:.52rem 1rem;color:rgba(255,255,255,.72);text-decoration:none;font-size:.72rem;font-weight:700;transition:all .2s}
+.di:hover{color:var(--gold);background:rgba(245,166,35,.08)}
+.hdr-date{margin-left:auto;font-size:.66rem;color:var(--gold);opacity:.7;font-weight:700;white-space:nowrap}
+
+/* LAYOUT */
+.cnt{max-width:1100px;margin:0 auto;padding:0 1.5rem}
+section{padding:100px 0 80px}
+.sh{text-align:center;margin-bottom:3rem}
+.slbl{font-size:.6rem;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem}
+.sh h2{font-size:clamp(2rem,5vw,3.1rem);font-weight:900;line-height:1.05}
+.gline{width:48px;height:2px;background:var(--gold);margin:.85rem auto}
+.ssub{color:var(--muted);font-size:.86rem;margin-top:.5rem}
+.fade{opacity:0;transform:translateY(22px);transition:opacity .6s,transform .6s}
+.fade.vis{opacity:1;transform:none}
+
+/* CARD */
+.card{background:rgba(255,255,255,.04);border:1px solid rgba(245,166,35,.13);border-radius:14px;padding:1.5rem;margin-bottom:1.1rem}
+.card h3{font-size:.82rem;font-weight:900;color:var(--gold);margin-bottom:.9rem;letter-spacing:.8px;text-transform:uppercase}
+
+/* HERO */
+#inicio{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 1.5rem 3rem;overflow:hidden;background:linear-gradient(135deg,#000820 0%,#001b6e 50%,#0a2db0 100%)}
+.hz{position:relative;z-index:2;text-align:center;max-width:860px}
+.heye{font-size:.6rem;letter-spacing:6px;text-transform:uppercase;color:var(--gold);margin-bottom:1.4rem}
+.hphoto{width:min(300px,75vw);border-radius:18px;border:2px solid rgba(245,166,35,.45);box-shadow:0 0 50px rgba(245,166,35,.2),0 20px 50px rgba(0,0,0,.6);margin:0 auto 1.7rem;display:block;object-fit:cover}
+.hph{width:min(300px,75vw);height:360px;border-radius:18px;border:2px dashed rgba(245,166,35,.3);background:rgba(245,166,35,.04);display:none;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 1.7rem;color:rgba(245,166,35,.4);font-size:.7rem;font-weight:700;letter-spacing:2px;gap:.5rem;text-align:center;padding:1.5rem}
+.hph-i{font-size:2.4rem}
+.htit{font-size:clamp(2.5rem,9vw,5rem);font-weight:900;line-height:.95;background:linear-gradient(130deg,#fff 25%,var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.4rem}
+.hsub{font-size:clamp(.85rem,2.5vw,1.3rem);color:rgba(255,255,255,.55);margin-bottom:1.9rem;font-weight:300;letter-spacing:3px}
+.hstats{display:flex;justify-content:center;gap:2.2rem;margin-bottom:1.9rem;flex-wrap:wrap}
+.hst .n{font-size:1.9rem;font-weight:900;color:var(--gold);display:block;line-height:1}
+.hst .l{font-size:.56rem;letter-spacing:2px;text-transform:uppercase;color:var(--faint)}
+.cdown{display:flex;gap:1.1rem;justify-content:center;margin-bottom:2.1rem;flex-wrap:wrap}
+.ci{text-align:center;background:rgba(255,255,255,.04);border:1px solid rgba(245,166,35,.18);border-radius:11px;padding:.6rem 1rem;min-width:62px}
+.ci .n{font-size:1.8rem;font-weight:900;line-height:1;display:block}
+.ci .l{font-size:.53rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold)}
+.cta{display:inline-block;background:linear-gradient(135deg,var(--gold),#e0891a);color:#000d3d;font-weight:900;font-size:.75rem;letter-spacing:2px;text-transform:uppercase;padding:.85rem 2.1rem;border-radius:50px;text-decoration:none;transition:all .3s;box-shadow:0 4px 20px rgba(245,166,35,.3)}
+.cta:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(245,166,35,.5)}
+.sc-hint{position:absolute;bottom:1.7rem;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.22);font-size:.58rem;letter-spacing:3px;text-transform:uppercase;animation:bob 2s infinite;z-index:2}
+@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+.hglow{position:absolute;bottom:-50px;left:50%;transform:translateX(-50%);width:700px;height:250px;background:radial-gradient(ellipse,rgba(245,166,35,.1) 0%,transparent 70%);pointer-events:none;z-index:1}
+
+/* PARIS */
+#paris{background:linear-gradient(180deg,#000b2e 0%,#00102a 100%);padding:100px 0 80px}
+.pdays{display:flex;flex-direction:column;gap:2.8rem}
+.pday{display:grid;grid-template-columns:1fr 1fr;gap:2.2rem;align-items:center}
+.pday.flip .pi{order:2}.pday.flip .pc{order:1}
+.pi{border-radius:13px;overflow:hidden;height:275px;position:relative}
+.pi img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.pi:hover img{transform:scale(1.06)}
+.pi-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,11,46,.65) 0%,transparent 55%)}
+.dbadge{display:inline-block;background:var(--gold);color:#000d3d;font-size:.58rem;font-weight:900;letter-spacing:2px;text-transform:uppercase;padding:.25rem .65rem;border-radius:20px;margin-bottom:.65rem}
+.pc h3{font-size:1.35rem;font-weight:900;margin-bottom:.8rem}
+.alist{list-style:none;display:flex;flex-direction:column;gap:.5rem}
+.ai{display:flex;gap:.65rem;align-items:flex-start;font-size:.75rem;color:var(--muted);line-height:1.4}
+.ai strong{color:#fff}
+.ai .cost{color:var(--gold);font-size:.66rem;font-weight:700}
+
+/* DISNEY */
+#disneyland{background:linear-gradient(180deg,#00102a 0%,#000d3d 100%);padding:100px 0 80px}
+.att-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1.25rem;margin-bottom:2.2rem}
+.att{background:rgba(255,255,255,.03);border:1px solid rgba(245,166,35,.12);border-radius:14px;overflow:hidden;transition:all .3s;text-decoration:none;display:block}
+.att:hover{transform:translateY(-5px);border-color:rgba(245,166,35,.4);box-shadow:0 18px 36px rgba(0,0,0,.5)}
+.att-img{height:165px;overflow:hidden;position:relative}
+.att-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.att:hover .att-img img{transform:scale(1.08)}
+.att-bdg{position:absolute;top:.55rem;right:.55rem;background:rgba(245,166,35,.95);color:#000d3d;font-size:.56rem;font-weight:900;letter-spacing:1px;padding:.18rem .5rem;border-radius:20px;text-transform:uppercase}
+.att-body{padding:1rem}
+.att-tit{font-size:.88rem;font-weight:800;color:#fff;margin-bottom:.25rem}
+.att-meta{font-size:.64rem;color:var(--faint);margin-bottom:.55rem}
+.att-desc{font-size:.71rem;color:var(--muted);line-height:1.5}
+.att-lnk{display:inline-flex;align-items:center;gap:.2rem;margin-top:.7rem;font-size:.63rem;font-weight:800;color:var(--gold);letter-spacing:.8px;text-transform:uppercase}
+.strat{background:rgba(245,166,35,.055);border:1px solid rgba(245,166,35,.16);border-radius:14px;padding:1.7rem;margin-top:1.5rem}
+.strat h3{font-size:.82rem;font-weight:900;color:var(--gold);margin-bottom:1.3rem;letter-spacing:1px;text-transform:uppercase}
+.pm-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:.85rem}
+.pmi{background:rgba(0,0,0,.22);border-radius:10px;padding:1rem}
+.pmi .prio{font-size:.62rem;font-weight:800;color:var(--gold);margin-bottom:.25rem}
+.pmi .ptit{font-size:.82rem;font-weight:700;color:#fff;margin-bottom:.2rem}
+.pmi .pver{font-size:.7rem;color:var(--muted)}
+
+/* FINANCIERO */
+#financiero{background:var(--navy-dark);padding:100px 0 80px}
+.ftabs{display:flex;gap:.4rem;flex-wrap:wrap;justify-content:center;margin-bottom:2.1rem}
+.ftab{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.52);font-size:.67rem;font-weight:800;letter-spacing:.7px;padding:.5rem 1rem;border-radius:25px;cursor:pointer;transition:all .2s;font-family:'Montserrat',sans-serif;text-transform:uppercase}
+.ftab:hover,.ftab.on{background:rgba(245,166,35,.12);border-color:rgba(245,166,35,.42);color:var(--gold)}
+.fpanel{display:none}.fpanel.on{display:block}
+
+/* Summary */
+.sum-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:.85rem;margin-bottom:1.6rem}
+.sum-c{background:rgba(255,255,255,.04);border:1px solid rgba(245,166,35,.17);border-radius:11px;padding:1.25rem;text-align:center}
+.sum-c .bn{font-size:1.6rem;font-weight:900;color:var(--gold);margin-bottom:.18rem}
+.sum-c .bl{font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--faint)}
+
+/* Table */
+.tbl{width:100%;border-collapse:collapse;font-size:.74rem}
+.tbl th{background:rgba(245,166,35,.08);color:var(--gold);font-weight:800;padding:.6rem .7rem;text-align:left;border-bottom:1px solid rgba(245,166,35,.16);font-size:.62rem;letter-spacing:1px;text-transform:uppercase}
+.tbl td{padding:.6rem .7rem;color:rgba(255,255,255,.8);border-bottom:1px solid rgba(255,255,255,.04)}
+.tbl tr:hover td{background:rgba(255,255,255,.02)}
+.tbl .am{font-weight:700;color:#fff}
+.tbl .cob{color:#4ade80;font-weight:700}
+.tbl .pag{color:#f87171;font-weight:700}
+
+/* Transfer */
+.xfer{display:flex;align-items:center;gap:.8rem;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:9px;padding:.78rem;margin-bottom:.55rem;font-size:.76rem;flex-wrap:wrap}
+.xfer .fr{font-weight:700;color:#f87171}
+.xfer .arr{color:var(--gold);font-size:1rem}
+.xfer .to{font-weight:700;color:#4ade80}
+.xfer .con{flex:1;font-size:.65rem;color:var(--faint)}
+.xfer .am{margin-left:auto;font-weight:900;font-size:.9rem;color:#fff}
+
+/* Itinerary */
+.iday{border-left:3px solid var(--gold);padding:.85rem 1.25rem;margin-bottom:1.25rem;background:rgba(255,255,255,.02);border-radius:0 10px 10px 0}
+.iday .dl{font-size:.6rem;font-weight:900;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:.35rem}
+.arow{background:rgba(255,255,255,.02);border-radius:7px;padding:.6rem;margin-bottom:.35rem}
+.arow .at{font-size:.76rem;font-weight:700;color:#fff;margin-bottom:.18rem}
+.arow .ad{font-size:.66rem;color:var(--muted);line-height:1.4}
+.arow .ac{font-size:.64rem;font-weight:700;color:var(--gold);margin-top:.18rem}
+.arow .an{font-size:.61rem;color:rgba(245,166,35,.5);margin-top:.12rem}
+
+/* Reservas */
+.res-row{display:flex;gap:.9rem;padding:.42rem 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:.72rem;flex-wrap:wrap}
+.res-row:last-child{border-bottom:none}
+.res-lbl{color:rgba(255,255,255,.38);font-weight:600;min-width:150px;flex-shrink:0}
+.res-val{color:#fff;font-weight:500}
+
+/* Transport */
+.trow{display:grid;grid-template-columns:2fr 1fr 1fr;gap:.45rem;padding:.52rem .55rem;border-radius:7px;font-size:.7rem;margin-bottom:.32rem;background:rgba(255,255,255,.02)}
+.trow .tn{font-weight:700;color:#fff}
+.trow .tm{color:var(--muted)}
+.trow .tp{color:var(--gold);font-weight:700}
+.trow .tno{font-size:.62rem;color:rgba(255,255,255,.32);grid-column:1/-1;margin-top:.18rem}
+.inforow{display:grid;grid-template-columns:1fr 2fr;gap:.45rem;padding:.48rem .55rem;border-radius:7px;font-size:.7rem;margin-bottom:.28rem;background:rgba(255,255,255,.02)}
+.inforow .il{font-weight:700;color:var(--gold)}
+.inforow .iv{color:rgba(255,255,255,.7)}
+
+/* Checklist */
+.cl-cat{margin-bottom:1.7rem}
+.cl-cat-t{font-size:.6rem;letter-spacing:3px;text-transform:uppercase;font-weight:900;margin-bottom:.85rem;padding-bottom:.42rem;border-bottom:1px solid rgba(245,166,35,.16)}
+.cli{display:flex;align-items:flex-start;gap:.85rem;padding:.75rem .85rem;border-radius:9px;margin-bottom:.42rem;cursor:pointer;transition:background .2s;background:rgba(255,255,255,.022);border:1px solid rgba(255,255,255,.05)}
+.cli:hover{background:rgba(255,255,255,.04)}
+.cli.done{opacity:.5}
+.chk{width:20px;height:20px;border:2px solid rgba(245,166,35,.38);border-radius:5px;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s;margin-top:1px;font-size:.68rem;font-weight:900}
+.cli.done .chk{background:#4ade80;border-color:#4ade80;color:#000d3d}
+.cl-cnt{flex:1}
+.cl-t{font-size:.78rem;font-weight:700;color:#fff;margin-bottom:.13rem}
+.cli.done .cl-t{text-decoration:line-through;color:rgba(255,255,255,.32)}
+.cl-d{font-size:.66rem;color:var(--faint)}
+.cl-plz{font-size:.59rem;font-weight:800;color:var(--gold);background:rgba(245,166,35,.09);padding:.12rem .48rem;border-radius:10px;white-space:nowrap;align-self:flex-start;flex-shrink:0}
+.sync-b{display:inline-flex;align-items:center;gap:.38rem;font-size:.65rem;font-weight:700;padding:.26rem .65rem;border-radius:20px;margin-bottom:1.1rem}
+.sync-local{background:rgba(59,130,246,.1);color:#93c5fd;border:1px solid rgba(59,130,246,.22)}
+.sync-on{background:rgba(74,222,128,.1);color:#86efac;border:1px solid rgba(74,222,128,.22)}
+.sdot{width:6px;height:6px;border-radius:50%;background:currentColor}
+
+/* FOOTER */
+footer{background:#000714;border-top:1px solid rgba(245,166,35,.1);padding:2.5rem 1.5rem;text-align:center}
+footer .ft{font-size:1.05rem;font-weight:900;color:var(--gold);margin-bottom:.35rem}
+footer .fs{font-size:.65rem;color:var(--faint);letter-spacing:2px}
+
+/* RESPONSIVE */
+@media(max-width:750px){
+  nav{display:none}
+  .pday,.pday.flip{grid-template-columns:1fr}
+  .pday.flip .pi,.pday.flip .pc{order:unset}
+  .hstats{gap:1.4rem}
+  .cdown{gap:.65rem}
+  .trow{grid-template-columns:1.5fr 1fr}
+}
+@media(max-width:540px){
+  .res-lbl{min-width:105px}
+  .xfer .con{display:none}
+}
+</style>
+</head>
+<body>
+
+<div id="stars"></div>
+
+<!-- ══════ HEADER ══════ -->
+<header id="hdr">
+  <div class="hdr-in">
+    <a href="#inicio" class="logo">✨ PARÍS <em>&</em> DISNEY</a>
+    <nav>
+      <a href="#inicio"     class="nl">Inicio</a>
+      <a href="#paris"      class="nl">🗼 París</a>
+      <a href="#disneyland" class="nl">🎢 Disneyland</a>
+      <div class="drp">
+        <a href="#financiero" class="nl">💶 Financiero</a>
+        <div class="dm">
+          <a href="#financiero" class="di" onclick="setTab('resumen')">📊 Resumen</a>
+          <a href="#financiero" class="di" onclick="setTab('reparto')">💸 Reparto</a>
+          <a href="#financiero" class="di" onclick="setTab('itinerario')">📅 Itinerario</a>
+          <a href="#financiero" class="di" onclick="setTab('transporte')">🚇 Transporte</a>
+          <a href="#financiero" class="di" onclick="setTab('reservas')">📋 Reservas</a>
+          <a href="#financiero" class="di" onclick="setTab('checklist')">✅ Checklist</a>
+        </div>
+      </div>
     </nav>
+    <span class="hdr-date">7–13 Sep 2026</span>
   </div>
 </header>
 
-<main class="max-w-6xl mx-auto px-4 py-6">
-
-  <!-- ══ RESUMEN ═══════════════════════════════════════════════════ -->
-  <div id="tab-resumen" class="section active fade-in">
-    <div id="resumen-content"></div>
+<!-- ══════ HERO ══════ -->
+<section id="inicio">
+  <div class="hz">
+    <div class="heye">✨ Una aventura familiar ✨</div>
+    <img id="himg" src="img/hero.jpg" alt="Familia" class="hphoto"
+         onerror="this.style.display='none';document.getElementById('hph').style.display='flex'">
+    <div id="hph" class="hph">
+      <div class="hph-i">🏰</div>
+      <div>SUBE LA FOTO<br>A <code style="font-size:.7em">img/hero.jpg</code></div>
+    </div>
+    <h1 class="htit">París &amp; Disney</h1>
+    <p class="hsub">7 – 13 Septiembre 2026</p>
+    <div class="gline"></div>
+    <div class="hstats">
+      <div class="hst"><span class="n">7</span><span class="l">Días</span></div>
+      <div class="hst"><span class="n">2</span><span class="l">Parques</span></div>
+      <div class="hst"><span class="n">6</span><span class="l">Aventureros</span></div>
+      <div class="hst"><span class="n">4</span><span class="l">Noches Disney</span></div>
+    </div>
+    <div class="cdown" id="cdown"></div>
+    <a href="#paris" class="cta">Ver el Plan ✨</a>
   </div>
+  <div class="hglow"></div>
+  <div class="sc-hint">↓ scroll</div>
+</section>
 
-  <!-- ══ REPARTO ═══════════════════════════════════════════════════ -->
-  <div id="tab-reparto" class="section fade-in">
-    <div id="reparto-content"></div>
+<!-- ══════ PARIS ══════ -->
+<section id="paris">
+  <div class="cnt">
+    <div class="sh fade">
+      <div class="slbl">La Ciudad de la Luz</div>
+      <h2>🗼 París</h2>
+      <div class="gline"></div>
+      <p class="ssub">Lunes 7 → Miércoles 9 de Septiembre</p>
+    </div>
+    <div class="pdays" id="pdays"></div>
   </div>
+</section>
 
-  <!-- ══ ITINERARIO ════════════════════════════════════════════════ -->
-  <div id="tab-itinerario" class="section fade-in">
-    <div id="itinerario-content"></div>
+<!-- ══════ DISNEYLAND ══════ -->
+<section id="disneyland">
+  <div class="cnt">
+    <div class="sh fade">
+      <div class="slbl">El Reino de la Magia</div>
+      <h2>🏰 Disneyland Paris</h2>
+      <div class="gline"></div>
+      <p class="ssub">Miércoles 9 → Domingo 13 · Explorers Hotel · 4 días / 2 parques</p>
+    </div>
+    <div class="att-grid" id="att-grid"></div>
+    <div class="strat fade">
+      <h3>⚡ Premier Access — Estrategia</h3>
+      <div class="pm-grid" id="pm-grid"></div>
+    </div>
   </div>
+</section>
 
-  <!-- ══ TRANSPORTE ════════════════════════════════════════════════ -->
-  <div id="tab-transporte" class="section fade-in">
-    <div id="transporte-content"></div>
+<!-- ══════ FINANCIERO ══════ -->
+<section id="financiero">
+  <div class="cnt">
+    <div class="sh fade">
+      <div class="slbl">Gestión del Viaje</div>
+      <h2>💶 Financiero</h2>
+      <div class="gline"></div>
+    </div>
+    <div class="ftabs">
+      <button class="ftab on" onclick="setTab('resumen')">📊 Resumen</button>
+      <button class="ftab"    onclick="setTab('reparto')">💸 Reparto</button>
+      <button class="ftab"    onclick="setTab('itinerario')">📅 Itinerario</button>
+      <button class="ftab"    onclick="setTab('transporte')">🚇 Transporte</button>
+      <button class="ftab"    onclick="setTab('reservas')">📋 Reservas</button>
+      <button class="ftab"    onclick="setTab('checklist')">✅ Checklist</button>
+    </div>
+    <div id="fp-resumen"    class="fpanel on"></div>
+    <div id="fp-reparto"    class="fpanel"></div>
+    <div id="fp-itinerario" class="fpanel"></div>
+    <div id="fp-transporte" class="fpanel"></div>
+    <div id="fp-reservas"   class="fpanel"></div>
+    <div id="fp-checklist"  class="fpanel"></div>
   </div>
+</section>
 
-  <!-- ══ RESERVAS ══════════════════════════════════════════════════ -->
-  <div id="tab-reservas" class="section fade-in">
-    <div id="reservas-content"></div>
-  </div>
-
-  <!-- ══ DISNEY ════════════════════════════════════════════════════ -->
-  <div id="tab-disney" class="section fade-in">
-    <div id="disney-content"></div>
-  </div>
-
-  <!-- ══ CHECKLIST ═════════════════════════════════════════════════ -->
-  <div id="tab-checklist" class="section fade-in">
-    <div id="checklist-content"></div>
-  </div>
-
-</main>
-
-<footer class="text-center text-xs text-gray-400 py-6 border-t border-gray-100">
-  Viaje París &amp; Disney 2026 · Última actualización: Abril 2026 · Para actualizar los datos, editar <code>data.js</code>
+<!-- ══════ FOOTER ══════ -->
+<footer>
+  <div class="ft">✨ París &amp; Disneyland 2026</div>
+  <div class="fs">Familia · 7–13 Septiembre · Una aventura de cuento</div>
 </footer>
 
 <script>
-// ── Utilidades ────────────────────────────────────────────────────────────
-const fmt = n => Number(n).toLocaleString('es-ES', {minimumFractionDigits:2, maximumFractionDigits:2}) + '€';
-const fmtN = n => Number(n).toLocaleString('es-ES', {minimumFractionDigits:2, maximumFractionDigits:2});
-const pct = (a,b) => Math.round((a/b)*100);
+// ── helpers ──────────────────────────────────────────────
+const eur=n=>n.toLocaleString('es-ES',{style:'currency',currency:'EUR'});
+const $=id=>document.getElementById(id);
 
-const COLOR_MAP = {
-  blue:   { bg:'bg-blue-50',   border:'border-blue-200',   hdr:'bg-blue-700',   tag:'bg-blue-100 text-blue-800' },
-  green:  { bg:'bg-green-50',  border:'border-green-200',  hdr:'bg-green-700',  tag:'bg-green-100 text-green-800' },
-  red:    { bg:'bg-red-50',    border:'border-red-200',    hdr:'bg-red-700',    tag:'bg-red-100 text-red-800' },
-  purple: { bg:'bg-purple-50', border:'border-purple-200', hdr:'bg-purple-700', tag:'bg-purple-100 text-purple-800' },
-  amber:  { bg:'bg-amber-50',  border:'border-amber-200',  hdr:'bg-amber-600',  tag:'bg-amber-100 text-amber-800' },
-  orange: { bg:'bg-orange-50', border:'border-orange-200', hdr:'bg-orange-600', tag:'bg-orange-100 text-orange-800' },
-  teal:   { bg:'bg-teal-50',   border:'border-teal-200',   hdr:'bg-teal-700',   tag:'bg-teal-100 text-teal-800' },
-  indigo: { bg:'bg-indigo-50', border:'border-indigo-200', hdr:'bg-indigo-700', tag:'bg-indigo-100 text-indigo-800' },
-  yellow: { bg:'bg-yellow-50', border:'border-yellow-200', hdr:'bg-yellow-600', tag:'bg-yellow-100 text-yellow-800' },
-};
-const c = (color, k) => (COLOR_MAP[color] || COLOR_MAP.blue)[k];
+// ── STARS ────────────────────────────────────────────────
+!function(){const c=$('stars');for(let i=0;i<85;i++){const s=document.createElement('div');s.className='star';const z=Math.random()*2+.5;s.style.cssText=`left:${Math.random()*100}vw;top:${Math.random()*100}vh;width:${z}px;height:${z}px;--d:${(Math.random()*3+2).toFixed(1)}s;--delay:${(Math.random()*5).toFixed(1)}s`;c.appendChild(s)}}();
 
-// ── Navegación ────────────────────────────────────────────────────────────
-document.querySelectorAll('.tab-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-    btn.classList.add('active');
-    const sec = document.getElementById('tab-' + btn.dataset.tab);
-    sec.classList.add('active', 'fade-in');
-    setTimeout(() => sec.classList.remove('fade-in'), 400);
+// ── COUNTDOWN ────────────────────────────────────────────
+function tick(){
+  const diff=new Date('2026-09-07T00:00:00')-new Date();
+  if(diff<=0){$('cdown').innerHTML='<div style="color:var(--gold);font-weight:900;font-size:1rem">🎉 ¡El viaje ha comenzado!</div>';return}
+  const d=Math.floor(diff/864e5),h=Math.floor(diff%864e5/36e5),m=Math.floor(diff%36e5/6e4),s=Math.floor(diff%6e4/1e3);
+  $('cdown').innerHTML=[{n:d,l:'días'},{n:h,l:'horas'},{n:m,l:'min'},{n:s,l:'seg'}].map(i=>`<div class="ci"><span class="n">${String(i.n).padStart(2,'0')}</span><span class="l">${i.l}</span></div>`).join('');
+}
+tick();setInterval(tick,1000);
+
+// ── PARIS SECTION ────────────────────────────────────────
+!function(){
+  const imgs=[
+    'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=900&q=80',
+    'https://images.unsplash.com/photo-1511739001486-6bfe10ce785f?w=900&q=80',
+    'https://images.unsplash.com/photo-1590650516494-0c8e4a4dd67e?w=900&q=80',
+  ];
+  const days=window.VIAJE_DATA.itinerario.slice(0,3);
+  const c=$('pdays');
+  days.forEach((day,i)=>{
+    const acts=day.actividades.slice(0,4);
+    c.innerHTML+=`<div class="pday fade${i%2===1?' flip':''}">
+      <div class="pi"><img src="${imgs[i]}" alt="${day.etapa}" loading="lazy"><div class="pi-ov"></div></div>
+      <div class="pc">
+        <span class="dbadge">${day.dia} · ${day.etapa}</span>
+        <h3>${day.dia}</h3>
+        <ul class="alist">${acts.map(a=>`<li class="ai">
+          <span style="flex-shrink:0">${a.titulo.slice(0,2)}</span>
+          <span><strong>${a.titulo.slice(3)}</strong><br>
+          <span style="font-size:.64rem;color:rgba(255,255,255,.35)">${a.detalles.slice(0,85)}${a.detalles.length>85?'…':''}</span>
+          ${a.coste&&a.coste!=='—'?`<br><span class="cost">${a.coste}</span>`:''}
+          </span></li>`).join('')}</ul>
+      </div>
+    </div>`;
   });
-});
+}();
 
-// ── RENDER principal ──────────────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', () => {
-  const D = window.VIAJE_DATA;
-  if (!D) { document.body.innerHTML='<p class="p-8 text-red-600">Error: data.js no cargado.</p>'; return; }
+// ── DISNEY ATTRACTIONS ───────────────────────────────────
+!function(){
+  const atts=[
+    {t:'🐀 Ratatouille: La Aventura',p:'Walt Disney Studios',b:'⭐ PREMIER ACCESS',
+     img:'https://images.unsplash.com/photo-1617396900799-f4ec2b43c7d3?w=700&q=80',
+     d:'La más popular del parque. Conviértete en Rémy y escápate por el restaurante Gusteau. Colas de 50+ min sin Premier Access.',
+     l:'https://www.disneylandparis.com/es-es/atracciones/walt-disney-studios-park/ratatouille-the-adventure/'},
+    {t:'🎢 Big Thunder Mountain',p:'Disneyland Park',b:'CLÁSICO',
+     img:'https://images.unsplash.com/photo-1565516641770-6ca37c437ec3?w=700&q=80',
+     d:'La montaña más salvaje del Oeste. Tren desbocado entre cañones y minas abandonadas. Ideal para Jairo y adultos.',
+     l:'https://www.disneylandparis.com/es-es/atracciones/disneyland-park/big-thunder-mountain/'},
+    {t:'🚗 Cars: Quatre Roues Rallye',p:'Walt Disney Studios',b:'TODOS ✅',
+     img:'https://images.unsplash.com/photo-1568515387631-8b650bbcdb90?w=700&q=80',
+     d:'Compite con Rayo McQueen en un circuito de giros y piruetas. Arion e Izhan la adoran.',
+     l:'https://www.disneylandparis.com/es-es/atracciones/walt-disney-studios-park/cars-quatre-roues-rallye/'},
+    {t:'⚡ Avengers Campus',p:'Walt Disney Studios',b:'SUPERHEROES',
+     img:'https://images.unsplash.com/photo-1635805737707-575885ab0820?w=700&q=80',
+     d:'Únete a los Avengers con Spider-Man en una misión de alto secreto. Revisar restricciones de menores.',
+     l:'https://www.disneylandparis.com/es-es/atracciones/walt-disney-studios-park/avengers-assemble-flight-force/'},
+    {t:'⚓ Piratas del Caribe',p:'Disneyland Park',b:'CLÁSICO',
+     img:'https://images.unsplash.com/photo-1559570278-eb8d71d06403?w=700&q=80',
+     d:'Navega junto a los piratas más famosos. Aventura acuática oscura y llena de tesoros. Todos la disfrutarán.',
+     l:'https://www.disneylandparis.com/es-es/atracciones/disneyland-park/pirates-of-the-caribbean/'},
+    {t:'✨ Disney Illuminations',p:'Disneyland Park · Noche',b:'NO PERDÉRSELO',
+     img:'https://images.unsplash.com/photo-1569245927994-9e32aab26f5a?w=700&q=80',
+     d:'El espectáculo nocturno más mágico de Europa. Fuegos artificiales, proyecciones y música sobre el Castillo.',
+     l:'https://www.disneylandparis.com/es-es/entretenimiento/disneyland-park/disney-illuminations/'},
+  ];
+  $('att-grid').innerHTML=atts.map(a=>`
+    <a href="${a.l}" target="_blank" rel="noopener" class="att">
+      <div class="att-img"><img src="${a.img}" alt="${a.t}" loading="lazy"><span class="att-bdg">${a.b}</span></div>
+      <div class="att-body">
+        <div class="att-tit">${a.t}</div>
+        <div class="att-meta">📍 ${a.p}</div>
+        <div class="att-desc">${a.d}</div>
+        <div class="att-lnk">Ver en Disneyland Paris →</div>
+      </div>
+    </a>`).join('');
+  const d=window.VIAJE_DATA;
+  $('pm-grid').innerHTML=d.disney.premierAccess.map(p=>`
+    <div class="pmi"><div class="prio">${p.prioridad}</div><div class="ptit">${p.titulo}</div><div class="pver">${p.veredicto}</div></div>`).join('');
+}();
 
-  document.getElementById('header-title').textContent = D.meta.titulo;
-  document.getElementById('header-fechas').textContent = D.meta.fechas + ' · ' + D.meta.personas.length + ' personas';
-  document.getElementById('header-total').textContent = fmt(D.meta.totalViaje);
-
-  renderResumen(D);
-  renderReparto(D);
-  renderItinerario(D);
-  renderTransporte(D);
-  renderReservas(D);
-  renderDisney(D);
-  renderChecklist(D);
-});
-
-// ══ RESUMEN ═══════════════════════════════════════════════════════════════
-function renderResumen(D) {
-  const el = document.getElementById('resumen-content');
-  const totalViaje = D.meta.totalViaje;
-
-  // Cards de totales
-  let gastoCards = D.financiero.gastos.map(g => `
-    <div class="card bg-white rounded-xl border border-gray-100 shadow-sm p-5">
-      <p class="text-lg font-bold text-gray-800">${g.concepto}</p>
-      <p class="text-2xl font-extrabold text-[#1a237e] mt-1">${fmt(g.total)}</p>
-      <p class="text-xs text-gray-400 mt-1">${g.referencia}</p>
-      <div class="mt-3 space-y-1">
-        ${g.detalle.map(d=>`
-          <div class="flex justify-between text-xs">
-            <span class="text-gray-600">${d.item}</span>
-            <span class="font-semibold text-gray-700">${fmt(d.total)}</span>
+// ── FIN: RESUMEN ─────────────────────────────────────────
+!function(){
+  const d=window.VIAJE_DATA;
+  $('fp-resumen').innerHTML=`
+    <div class="sum-grid">
+      <div class="sum-c"><div class="bn">${eur(d.meta.totalViaje)}</div><div class="bl">Total Viaje</div></div>
+      <div class="sum-c"><div class="bn">${d.meta.personas.length}</div><div class="bl">Personas</div></div>
+      <div class="sum-c"><div class="bn">930,90€</div><div class="bl">÷6 por persona (igual)</div></div>
+      <div class="sum-c"><div class="bn">873,17€</div><div class="bl">Niños (diferenciado)</div></div>
+    </div>
+    <div class="card"><h3>💳 Quién pagó qué</h3>
+      ${d.financiero.pagos.map(p=>`<div class="xfer">
+        <span style="font-size:1.3rem">${p.icon}</span>
+        <div><div style="font-weight:800;color:#fff">${p.quien}</div><div style="font-size:.66rem;color:rgba(255,255,255,.38)">${p.concepto}</div></div>
+        <span class="am">${eur(p.importe)}</span></div>`).join('')}
+    </div>
+    <div class="card"><h3>📋 Desglose de Gastos</h3>
+      ${d.financiero.gastos.map(g=>`
+        <div style="margin-bottom:1.1rem">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.55rem">
+            <span style="font-weight:900;color:#fff;font-size:.88rem">${g.concepto}</span>
+            <span style="font-weight:900;color:var(--gold)">${eur(g.total)}</span>
           </div>
-          <div class="text-xs text-gray-400 -mt-0.5 mb-1">${d.nota}</div>
-        `).join('')}
-      </div>
-    </div>
-  `).join('');
+          <div style="font-size:.62rem;color:rgba(255,255,255,.25);margin-bottom:.55rem">Ref: ${g.referencia}</div>
+          ${g.detalle.map(det=>`
+            <div style="display:flex;justify-content:space-between;padding:.35rem 0;border-top:1px solid rgba(255,255,255,.04);font-size:.72rem">
+              <span style="color:rgba(255,255,255,.58)">${det.item}</span>
+              <span style="color:#fff;font-weight:600">${eur(det.total)} <span style="color:rgba(255,255,255,.28);font-size:.63rem">${det.nota}</span></span>
+            </div>`).join('')}
+        </div>`).join('<hr style="border:none;border-top:1px solid rgba(245,166,35,.07);margin:.85rem 0">')}
+    </div>`;
+}();
 
-  // Quién pagó
-  let pagoCards = D.financiero.pagos.map(p => `
-    <div class="bg-white rounded-xl border border-gray-100 shadow-sm p-5 flex items-center gap-4">
-      <div class="text-3xl">${p.icon}</div>
-      <div class="flex-1">
-        <p class="font-bold text-gray-800">${p.quien}</p>
-        <p class="text-xs text-gray-500">${p.concepto}</p>
-      </div>
-      <div class="text-right">
-        <p class="text-xl font-extrabold text-[#1a237e]">${fmt(p.importe)}</p>
-        <p class="text-xs text-gray-400">${pct(p.importe,totalViaje)}% del total</p>
-      </div>
-    </div>
-  `).join('');
+// ── FIN: REPARTO ─────────────────────────────────────────
+!function(){
+  const d=window.VIAJE_DATA;
+  const mk=r=>`<div class="card"><h3>${r.titulo}</h3>
+    <p style="font-size:.72rem;color:rgba(255,255,255,.38);margin-bottom:1rem">${r.descripcion}</p>
+    <div style="overflow-x:auto"><table class="tbl">
+      <thead><tr><th>Persona</th><th>Pagado</th><th>Corresponde</th><th>Saldo</th></tr></thead>
+      <tbody>${r.personas.map(p=>`<tr>
+        <td style="font-weight:800;color:#fff">${p.nombre}</td>
+        <td class="am">${eur(p.pago)}</td><td class="am">${eur(p.corresponde)}</td>
+        <td class="${p.estado==='cobra'?'cob':'pag'}">${p.estado==='cobra'?'+':''}${eur(p.saldo)}<br><span style="font-size:.58rem;opacity:.6">${p.estado==='cobra'?'← cobra':'→ paga'}</span></td>
+      </tr>`).join('')}</tbody></table></div>
+    <div style="margin-top:1.3rem">
+      <div style="font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:900;margin-bottom:.65rem">Transferencias</div>
+      ${r.transferencias.map(t=>`<div class="xfer">
+        <span class="fr">${t.de}</span><span class="arr">→</span><span class="to">${t.a}</span>
+        <span class="con">${t.concepto}</span><span class="am">${eur(t.importe)}</span>
+      </div>`).join('')}
+    </div></div>`;
+  $('fp-reparto').innerHTML=mk(d.reparto.igual)+mk(d.reparto.diferenciado);
+}();
 
-  // Barra de progreso del viaje
-  const totalPagado = D.financiero.pagos.reduce((s,p)=>s+p.importe,0);
+// ── FIN: ITINERARIO ──────────────────────────────────────
+!function(){
+  const d=window.VIAJE_DATA;
+  const cm={amber:'#f59e0b',blue:'#3b82f6',purple:'#a855f7',red:'#ef4444',teal:'#14b8a6',orange:'#f97316'};
+  $('fp-itinerario').innerHTML=d.itinerario.map(day=>`
+    <div class="iday" style="border-left-color:${cm[day.color]||'var(--gold)'}">
+      <div class="dl">${day.dia} · ${day.etapa}</div>
+      ${day.actividades.map(a=>`<div class="arow">
+        <div class="at">${a.titulo}</div>
+        <div class="ad">${a.detalles}</div>
+        ${a.coste&&a.coste!=='—'?`<div class="ac">${a.coste}</div>`:''}
+        ${a.notas?`<div class="an">💡 ${a.notas}</div>`:''}
+      </div>`).join('')}
+    </div>`).join('');
+}();
 
-  // Mini resumen reparto
-  const r1 = D.reparto.igual;
-  const miniReparto = r1.transferencias.map(t=>`
-    <div class="flex items-center gap-2 text-sm py-1.5 border-b border-gray-50 last:border-0">
-      <span class="font-semibold text-gray-700 w-20 shrink-0">${t.de}</span>
-      <span class="text-gray-400">→</span>
-      <span class="text-gray-700 w-24 shrink-0">${t.a}</span>
-      <span class="ml-auto font-bold text-[#1a237e] shrink-0">${fmt(t.importe)}</span>
-      <span class="text-xs px-2 py-0.5 rounded-full ${t.estado==='hecho'?'bg-green-100 text-green-700':'bg-amber-100 text-amber-700'} shrink-0">${t.estado==='hecho'?'✅ Hecho':'⏳'}</span>
-    </div>
-  `).join('');
+// ── FIN: TRANSPORTE ──────────────────────────────────────
+!function(){
+  const d=window.VIAJE_DATA;
+  $('fp-transporte').innerHTML=d.transporte.map(g=>`<div class="card"><h3>${g.titulo}</h3>
+    ${(g.tramos||[]).map(t=>`<div class="trow">
+      <div class="tn">${t.tramo}</div><div class="tm">${t.medio}</div><div class="tp">${t.total}</div>
+      ${t.nota?`<div class="tno">💡 ${t.nota}</div>`:''}
+    </div>`).join('')}
+    ${(g.info||[]).map(i=>`<div class="inforow"><div class="il">${i.label}</div><div class="iv">${i.valor}</div></div>`).join('')}
+  </div>`).join('');
+}();
 
-  el.innerHTML = `
-    <h2 class="text-2xl font-extrabold text-gray-900 mb-1">Resumen del viaje</h2>
-    <p class="text-gray-500 text-sm mb-6">${D.meta.fechas} · ${D.meta.personas.join(' · ')}</p>
+// ── FIN: RESERVAS ────────────────────────────────────────
+!function(){
+  const d=window.VIAJE_DATA;
+  $('fp-reservas').innerHTML=Object.values(d.reservas).map(r=>`<div class="card"><h3>${r.titulo}</h3>
+    ${r.datos.map(row=>`<div class="res-row">
+      <span class="res-lbl">${row.label}</span><span class="res-val">${row.valor}</span>
+    </div>`).join('')}
+  </div>`).join('');
+}();
 
-    <!-- Total viaje -->
-    <div class="bg-gradient-to-br from-[#1a237e] to-[#3949ab] text-white rounded-2xl p-6 mb-6 shadow-lg">
-      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <div>
-          <p class="text-blue-200 text-sm font-medium">TOTAL VIAJE YA PAGADO</p>
-          <p class="text-4xl font-extrabold mt-1">${fmt(totalViaje)}</p>
-          <p class="text-blue-300 text-xs mt-2">Gastos en destino (comidas, entradas adicionales) NO incluidos</p>
-        </div>
-        <div class="text-right sm:text-right">
-          <p class="text-blue-200 text-xs">Por persona (÷6 igual)</p>
-          <p class="text-2xl font-bold">${fmt(r1.porPersona)}</p>
-        </div>
-      </div>
-      <div class="mt-4 bg-white/10 rounded-full h-2">
-        <div class="progress-bar h-2 rounded-full" style="width:100%"></div>
-      </div>
-      <p class="text-xs text-blue-300 mt-1">100% del viaje reservado y pagado ✅</p>
-    </div>
+// ── FIN: CHECKLIST ───────────────────────────────────────
+const SCRIPT_URL=(window.VIAJE_DATA&&window.VIAJE_DATA.APPS_SCRIPT_URL)||'';
+function loadState(){try{return JSON.parse(localStorage.getItem('cl2')||'{}')}catch{return{}}}
+function saveState(s){localStorage.setItem('cl2',JSON.stringify(s))}
+async function syncSheet(i,e){if(!SCRIPT_URL)return;try{await fetch(SCRIPT_URL,{method:'POST',body:JSON.stringify({index:i,estado:e})})}catch(x){console.warn(x)}}
 
-    <!-- Gastos por bloque -->
-    <h3 class="text-lg font-bold text-gray-800 mb-3">Gastos principales</h3>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-      ${gastoCards}
-    </div>
-
-    <!-- Quién pagó -->
-    <h3 class="text-lg font-bold text-gray-800 mb-3">¿Quién adelantó el dinero?</h3>
-    <div class="space-y-3 mb-6">
-      ${pagoCards}
-    </div>
-
-    <!-- Mini transferencias -->
-    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
-      <div class="flex items-center justify-between mb-4">
-        <h3 class="text-lg font-bold text-gray-800">💸 Transferencias pendientes</h3>
-        <span class="text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded-full">Reparto ÷6 igual</span>
-      </div>
-      ${miniReparto}
-      <p class="text-xs text-gray-400 mt-3">Para ver el reparto diferenciado (por edades) → pestaña 💸 Reparto</p>
-    </div>
-  `;
-}
-
-// ══ REPARTO ═══════════════════════════════════════════════════════════════
-function renderReparto(D) {
-  const el = document.getElementById('reparto-content');
-
-  function repartoBlock(rep, color) {
-    const rows = rep.personas.map(p => {
-      const pos = p.saldo >= 0;
-      return `
-        <tr class="${pos?'bg-green-50':'bg-red-50'}">
-          <td class="px-4 py-3 font-semibold text-gray-800">${p.nombre}</td>
-          <td class="px-4 py-3 text-right text-gray-600">${fmt(p.pago)}</td>
-          <td class="px-4 py-3 text-right text-gray-600">${fmt(p.corresponde)}</td>
-          <td class="px-4 py-3 text-right font-bold ${pos?'saldo-pos':'saldo-neg'}">${pos?'+':''}${fmt(p.saldo)}</td>
-          <td class="px-4 py-3 text-center">
-            <span class="text-xs px-2 py-1 rounded-full font-semibold ${pos?'bg-green-100 text-green-700':'bg-red-100 text-red-700'}">
-              ${pos?'✅ Le deben':'⚠️ Debe pagar'}
-            </span>
-          </td>
-        </tr>
-      `;
-    }).join('');
-
-    const trans = rep.transferencias.map((t,i) => `
-      <div class="flex flex-wrap items-center gap-2 py-3 ${i<rep.transferencias.length-1?'border-b border-gray-100':''}">
-        <span class="font-bold text-gray-800 w-24">${t.de}</span>
-        <span class="text-gray-400 text-lg">→</span>
-        <span class="text-gray-700 w-24">${t.a}</span>
-        <span class="text-xs text-gray-500 flex-1">${t.concepto}</span>
-        <span class="font-extrabold text-[#1a237e] text-base">${fmt(t.importe)}</span>
-        <span class="text-xs px-2 py-0.5 rounded-full ${t.estado==='hecho'?'bg-green-100 text-green-700':'bg-amber-100 text-amber-700'}">
-          ${t.estado==='hecho'?'✅ Hecho':'⏳ Pendiente'}
-        </span>
-      </div>
-    `).join('');
-
-    return `
-      <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden mb-6">
-        <div class="bg-[#1a237e] text-white px-5 py-4">
-          <h3 class="text-lg font-bold">${rep.titulo}</h3>
-          <p class="text-blue-200 text-sm mt-1">${rep.descripcion}</p>
-          ${rep.porPersona ? `<p class="text-2xl font-extrabold mt-2">${fmt(rep.porPersona)} <span class="text-sm font-normal text-blue-300">por persona</span></p>` : ''}
-        </div>
-        <div class="overflow-x-auto">
-          <table class="w-full text-sm">
-            <thead>
-              <tr class="bg-gray-50 border-b border-gray-100">
-                <th class="px-4 py-3 text-left text-gray-600 font-semibold">Persona</th>
-                <th class="px-4 py-3 text-right text-gray-600 font-semibold">Pagó</th>
-                <th class="px-4 py-3 text-right text-gray-600 font-semibold">Le corresponde</th>
-                <th class="px-4 py-3 text-right text-gray-600 font-semibold">Diferencia</th>
-                <th class="px-4 py-3 text-center text-gray-600 font-semibold">Estado</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-gray-50">${rows}</tbody>
-          </table>
-        </div>
-        <div class="px-5 py-4 border-t border-gray-100">
-          <p class="font-bold text-gray-800 mb-3">💸 Transferencias a realizar</p>
-          ${trans}
-        </div>
-      </div>
-    `;
-  }
-
-  el.innerHTML = `
-    <h2 class="text-2xl font-extrabold text-gray-900 mb-1">Reparto de gastos</h2>
-    <p class="text-gray-500 text-sm mb-6">Total viaje: ${fmt(D.meta.totalViaje)}</p>
-
-    <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-6 text-sm">
-      <p class="font-semibold text-amber-800">📊 ¿Cuál usar?</p>
-      <p class="text-amber-700 mt-1">
-        <strong>Reparto ÷6 igual:</strong> Todos pagan lo mismo (${fmt(D.reparto.igual.porPersona)}/persona) — más simple.<br>
-        <strong>Reparto diferenciado:</strong> Maletas y tasa local según gasto real, niños sin tasa adulto — más justo.
-      </p>
-    </div>
-
-    ${repartoBlock(D.reparto.igual, 'blue')}
-    ${repartoBlock(D.reparto.diferenciado, 'teal')}
-
-    <div class="bg-blue-50 border border-blue-100 rounded-xl p-4 text-xs text-blue-700 mt-2">
-      ℹ️ Diferencia máxima entre adulto y niño (diferenciado):
-      ${fmt(D.reparto.diferenciado.personas.find(p=>p.nombre==='Juani').corresponde - D.reparto.diferenciado.personas.find(p=>p.nombre==='Jairo').corresponde)}
-    </div>
-  `;
-}
-
-// ══ ITINERARIO ════════════════════════════════════════════════════════════
-function renderItinerario(D) {
-  const el = document.getElementById('itinerario-content');
-
-  const dias = D.itinerario.map(dia => {
-    const clr = dia.color;
-    const acts = dia.actividades.map(a => `
-      <div class="pl-4 border-l-2 border-gray-200 pb-4 last:pb-0">
-        <p class="font-semibold text-gray-800 text-sm">${a.titulo}</p>
-        <p class="text-xs text-gray-500 mt-1 whitespace-pre-line">${a.detalles}</p>
-        <div class="flex flex-wrap gap-2 mt-2">
-          ${a.coste ? `<span class="text-xs px-2 py-0.5 rounded-full ${a.coste.includes('PAGADO')?'bg-green-100 text-green-700':'bg-blue-50 text-blue-700'} font-medium">${a.coste}</span>` : ''}
-          ${a.notas ? `<span class="text-xs text-gray-400 italic">${a.notas}</span>` : ''}
-        </div>
-      </div>
-    `).join('');
-
-    return `
-      <div class="card bg-white rounded-2xl border ${c(clr,'border')} shadow-sm overflow-hidden mb-4">
-        <div class="${c(clr,'hdr')} text-white px-5 py-3 flex items-center justify-between">
-          <div>
-            <span class="text-lg font-extrabold">${dia.dia}</span>
-            <span class="ml-3 text-sm font-medium opacity-90">${dia.etapa}</span>
-          </div>
-        </div>
-        <div class="p-5 space-y-4">${acts}</div>
-      </div>
-    `;
-  }).join('');
-
-  el.innerHTML = `
-    <h2 class="text-2xl font-extrabold text-gray-900 mb-1">Itinerario completo</h2>
-    <p class="text-gray-500 text-sm mb-6">${D.meta.fechas}</p>
-    ${dias}
-    <div class="bg-red-50 border border-red-200 rounded-xl p-4 text-sm mt-2">
-      <p class="font-bold text-red-800">🚨 Avisos críticos</p>
-      <ul class="mt-2 space-y-1 text-red-700 text-xs list-disc list-inside">
-        <li>Día 13: Vuelo ORY→SVQ a las 09:50h. Salir del hotel Disney a las 06:00h MÁXIMO.</li>
-        <li>FREE TOUR Día 8: Reservar en guruwalk.com con antelación (plazas limitadas).</li>
-        <li>Consigna Día 9: El Explorers Hotel tiene consigna GRATUITA 24h para huéspedes.</li>
-      </ul>
-    </div>
-  `;
-}
-
-// ══ TRANSPORTE ════════════════════════════════════════════════════════════
-function renderTransporte(D) {
-  const el = document.getElementById('transporte-content');
-
-  const sections = D.transporte.map(sec => {
-    const clr = sec.color;
-
-    if (sec.info) {
-      // Navigo Easy special section
-      const rows = sec.info.map((r,i) => `
-        <div class="${i%2===0?'bg-yellow-50':'bg-white'} px-4 py-3 ${r.label.includes('CRÍTICO')?'border border-red-300 rounded-lg my-1':''} ">
-          <span class="font-semibold text-gray-700 text-sm ${r.label.includes('CRÍTICO')?'text-red-700':''}">${r.label}:</span>
-          <span class="text-sm text-gray-600 ml-2 ${r.label.includes('CRÍTICO')?'text-red-600 font-medium':''}">${r.valor}</span>
-        </div>
-      `).join('');
-      return `
-        <div class="card bg-white rounded-2xl border border-yellow-200 shadow-sm overflow-hidden mb-4">
-          <div class="bg-yellow-500 text-white px-5 py-3">
-            <h3 class="font-bold text-base">${sec.titulo}</h3>
-          </div>
-          <div class="divide-y divide-yellow-50">${rows}</div>
-        </div>
-      `;
-    }
-
-    const rows = sec.tramos.map((t,i) => `
-      <div class="${i%2===0?'bg-white':'bg-gray-50'} p-4">
-        <div class="flex flex-wrap gap-2 items-start justify-between mb-2">
-          <div>
-            <p class="font-semibold text-gray-800 text-sm">${t.tramo}</p>
-            <p class="text-xs text-gray-500 mt-0.5">${t.medio} · ${t.duracion}</p>
-          </div>
-          <div class="text-right shrink-0">
-            <p class="font-bold text-[#1a237e]">${t.total}</p>
-            <p class="text-xs text-gray-500">${t.precio_adulto} adulto${t.precio_nino && t.precio_nino!=='—'?' · '+t.precio_nino+' niño':''}</p>
-          </div>
-        </div>
-        ${t.nota ? `<p class="text-xs text-gray-500 mt-1 italic border-l-2 border-gray-200 pl-2">${t.nota}</p>` : ''}
-        ${t.reservar && t.reservar!=='—' ? `<p class="text-xs mt-1"><span class="font-medium text-gray-600">Reservar en:</span> <span class="text-blue-600">${t.reservar}</span></p>` : ''}
-      </div>
-    `).join('');
-
-    return `
-      <div class="card bg-white rounded-2xl border ${c(clr,'border')} shadow-sm overflow-hidden mb-4">
-        <div class="${c(clr,'hdr')} text-white px-5 py-3">
-          <h3 class="font-bold text-base">${sec.titulo}</h3>
-        </div>
-        <div class="divide-y divide-gray-100">${rows}</div>
-      </div>
-    `;
-  }).join('');
-
-  el.innerHTML = `
-    <h2 class="text-2xl font-extrabold text-gray-900 mb-1">Guía de transportes</h2>
-    <p class="text-gray-500 text-sm mb-6">Todos los trayectos del viaje</p>
-    ${sections}
-  `;
-}
-
-// ══ RESERVAS ══════════════════════════════════════════════════════════════
-function renderReservas(D) {
-  const el = document.getElementById('reservas-content');
-  const totalViaje = D.meta.totalViaje;
-
-  const blocks = Object.values(D.reservas).map(res => {
-    const clr = res.color;
-    const rows = res.datos.map((d,i) => `
-      <div class="${i%2===0?'bg-white':'bg-gray-50'} px-4 py-3 flex gap-3">
-        <span class="font-semibold text-gray-600 text-sm shrink-0 w-40">${d.label}</span>
-        <span class="text-sm text-gray-800 ${d.valor.includes('✅')?'font-semibold text-green-700':''} ${d.valor.includes('⚠️')?'font-semibold text-amber-700':''}">${d.valor}</span>
-      </div>
-    `).join('');
-    return `
-      <div class="card bg-white rounded-2xl border ${c(clr,'border')} shadow-sm overflow-hidden mb-5">
-        <div class="${c(clr,'hdr')} text-white px-5 py-4">
-          <h3 class="text-lg font-bold">${res.titulo}</h3>
-        </div>
-        <div class="divide-y divide-gray-50">${rows}</div>
-      </div>
-    `;
-  }).join('');
-
-  // Resumen financiero
-  const gastos = D.financiero.gastos;
-  const resumenFin = gastos.map(g => `
-    <div class="flex justify-between items-center py-2 border-b border-gray-50 last:border-0">
-      <span class="text-sm text-gray-700">${g.concepto}</span>
-      <span class="font-bold text-gray-800">${fmt(g.total)}</span>
-    </div>
-  `).join('');
-
-  el.innerHTML = `
-    <h2 class="text-2xl font-extrabold text-gray-900 mb-1">Reservas confirmadas</h2>
-    <p class="text-gray-500 text-sm mb-6">Datos de referencia para el viaje</p>
-    ${blocks}
-    <div class="bg-gradient-to-br from-[#1a237e] to-[#3949ab] text-white rounded-2xl p-5 shadow">
-      <h3 class="font-bold text-lg mb-3">💰 Resumen financiero global</h3>
-      ${resumenFin}
-      <div class="mt-3 pt-3 border-t border-white/20 flex justify-between items-center">
-        <span class="font-bold text-blue-200">TOTAL VIAJE YA PAGADO</span>
-        <span class="text-2xl font-extrabold">${fmt(totalViaje)}</span>
-      </div>
-    </div>
-  `;
-}
-
-// ══ DISNEY ════════════════════════════════════════════════════════════════
-function renderDisney(D) {
-  const el = document.getElementById('disney-content');
-
-  const dias = D.disney.dias.map(dia => {
-    const clr = dia.color;
-    const rows = dia.plan.map((a,i) => `
-      <tr class="${i%2===0?'bg-white':'bg-gray-50'}">
-        <td class="px-4 py-3 text-sm font-bold text-gray-700 whitespace-nowrap">${a.hora}</td>
-        <td class="px-4 py-3 text-sm font-semibold text-gray-800">${a.titulo}</td>
-        <td class="px-4 py-3 text-xs text-gray-500 hide-mobile">${a.parque}</td>
-        <td class="px-4 py-3 text-xs text-gray-500 hide-mobile">${a.quien}</td>
-        <td class="px-4 py-3">
-          <span class="text-xs px-2 py-0.5 rounded-full font-medium ${a.cola.includes('Premier')?'bg-amber-100 text-amber-700':a.cola==='Sin cola'?'bg-green-100 text-green-700':'bg-gray-100 text-gray-600'}">${a.cola}</span>
-        </td>
-        <td class="px-4 py-3 text-xs text-gray-400 italic hide-mobile">${a.notas}</td>
-      </tr>
-    `).join('');
-
-    return `
-      <div class="card bg-white rounded-2xl border ${c(clr,'border')} shadow-sm overflow-hidden mb-4">
-        <div class="${c(clr,'hdr')} text-white px-5 py-3">
-          <h3 class="font-bold text-base">${dia.dia} — ${dia.tipo}</h3>
-        </div>
-        <div class="overflow-x-auto">
-          <table class="w-full text-sm">
-            <thead class="bg-gray-50 border-b border-gray-100">
-              <tr>
-                <th class="px-4 py-2 text-left text-xs text-gray-500 font-semibold">Hora</th>
-                <th class="px-4 py-2 text-left text-xs text-gray-500 font-semibold">Actividad</th>
-                <th class="px-4 py-2 text-left text-xs text-gray-500 font-semibold hide-mobile">Parque</th>
-                <th class="px-4 py-2 text-left text-xs text-gray-500 font-semibold hide-mobile">Para quién</th>
-                <th class="px-4 py-2 text-left text-xs text-gray-500 font-semibold">Cola</th>
-                <th class="px-4 py-2 text-left text-xs text-gray-500 font-semibold hide-mobile">Notas</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-gray-50">${rows}</tbody>
-          </table>
-        </div>
-      </div>
-    `;
-  }).join('');
-
-  // Premier Access
-  const paRows = D.disney.premierAccess.map((pa,i) => `
-    <tr class="${i%2===0?'bg-white':'bg-gray-50'}">
-      <td class="px-4 py-3 text-sm font-bold ${pa.prioridad.includes('COMPRAR')? 'text-green-700': pa.prioridad.includes('VALORAR')?'text-amber-600':'text-gray-400'}">${pa.prioridad}</td>
-      <td class="px-4 py-3 text-sm font-semibold text-gray-800">${pa.titulo}</td>
-      <td class="px-4 py-3 text-xs text-gray-500 hide-mobile">${pa.parque}</td>
-      <td class="px-4 py-3 text-xs text-gray-500 hide-mobile">${pa.quien}</td>
-      <td class="px-4 py-3 text-sm font-bold text-[#1a237e]">${pa.precio}</td>
-      <td class="px-4 py-3 text-xs text-gray-600 italic">${pa.veredicto}</td>
-    </tr>
-  `).join('');
-
-  el.innerHTML = `
-    <h2 class="text-2xl font-extrabold text-gray-900 mb-1">🎢 Estrategia Disney</h2>
-    <p class="text-gray-500 text-sm mb-6">${D.disney.subtitulo}</p>
-    ${dias}
-    <div class="card bg-white rounded-2xl border border-amber-200 shadow-sm overflow-hidden mb-4">
-      <div class="bg-amber-500 text-white px-5 py-3">
-        <h3 class="font-bold text-base">⭐ Premier Access — Solo 2 imprescindibles con 6 personas en septiembre</h3>
-      </div>
-      <div class="overflow-x-auto">
-        <table class="w-full text-sm">
-          <thead class="bg-gray-50 border-b border-gray-100">
-            <tr>
-              <th class="px-4 py-2 text-left text-xs text-gray-500 font-semibold">Prioridad</th>
-              <th class="px-4 py-2 text-left text-xs text-gray-500 font-semibold">Atracción</th>
-              <th class="px-4 py-2 text-left text-xs text-gray-500 font-semibold hide-mobile">Parque</th>
-              <th class="px-4 py-2 text-left text-xs text-gray-500 font-semibold hide-mobile">Para quién</th>
-              <th class="px-4 py-2 text-left text-xs text-gray-500 font-semibold">Precio est.</th>
-              <th class="px-4 py-2 text-left text-xs text-gray-500 font-semibold">Veredicto</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-gray-50">${paRows}</tbody>
-        </table>
-      </div>
-    </div>
-  `;
-}
-
-// ══ CHECKLIST ════════════════════════════════════════════════════════════
-function renderChecklist(D) {
-  const el = document.getElementById('checklist-content');
-
-  const catConfig = {
-    urgente: { label: '🔴 Urgente / Ya Hecho',       bg: 'bg-red-600',    border: 'border-red-200' },
-    proximo: { label: '🟡 Pendiente — Próximas Semanas', bg: 'bg-amber-500', border: 'border-amber-200' },
-    salir:   { label: '🟢 Antes de Salir',             bg: 'bg-green-600',  border: 'border-green-200' },
-    orly:    { label: '🔵 Al Llegar a Orly',           bg: 'bg-blue-700',   border: 'border-blue-200' },
+function buildCL(){
+  const d=window.VIAJE_DATA,state=loadState();
+  const cats={
+    urgente:{l:'🚨 Urgente — Ya reservado',c:'#ef4444'},
+    proximo:{l:'📅 Próximo — Pendiente de acción',c:'#f59e0b'},
+    salir:  {l:'🧳 Antes de salir',c:'#60a5fa'},
+    orly:   {l:'✈️ Al llegar a Orly',c:'#a855f7'},
   };
-
-  const total = D.checklist.length;
-  const hechos = D.checklist.filter(t => t.estado === 'confirmado').length;
-  const pctDone = pct(hechos, total);
-
-  let html = `
-    <h2 class="text-2xl font-extrabold text-gray-900 mb-1">✅ Checklist del viaje</h2>
-    <div class="bg-white rounded-xl border border-gray-100 shadow-sm p-4 mb-6">
-      <div class="flex items-center justify-between mb-2">
-        <span class="text-sm font-semibold text-gray-700">Progreso general</span>
-        <span class="text-sm font-bold text-[#1a237e]">${hechos}/${total} tareas</span>
-      </div>
-      <div class="bg-gray-100 rounded-full h-3">
-        <div class="progress-bar h-3 rounded-full" style="width:${pctDone}%"></div>
-      </div>
-      <p class="text-xs text-gray-400 mt-1">${pctDone}% completado</p>
-    </div>
-  `;
-
-  Object.entries(catConfig).forEach(([cat, cfg]) => {
-    const items = D.checklist.filter(t => t.categoria === cat);
-    if (!items.length) return;
-
-    const rows = items.map(t => {
-      const done = t.estado === 'confirmado';
-      return `
-        <div class="flex items-start gap-3 px-4 py-3 ${done?'bg-green-50':'bg-white'} border-b border-gray-50 last:border-0">
-          <span class="text-lg mt-0.5 shrink-0">${done?'☑':'☐'}</span>
-          <div class="flex-1 min-w-0">
-            <p class="text-sm font-semibold text-gray-800 ${done?'line-through text-gray-400':''}">${t.tarea}</p>
-            <p class="text-xs text-gray-500 mt-0.5">${t.detalle}</p>
-          </div>
-          <div class="text-right shrink-0">
-            <span class="text-xs ${done?'bg-green-100 text-green-700':'bg-amber-100 text-amber-700'} px-2 py-0.5 rounded-full font-medium whitespace-nowrap">${done?'✅ Hecho':t.plazo}</span>
-          </div>
-        </div>
-      `;
-    }).join('');
-
-    html += `
-      <div class="card bg-white rounded-2xl border ${cfg.border} shadow-sm overflow-hidden mb-4">
-        <div class="${cfg.bg} text-white px-5 py-3">
-          <h3 class="font-bold text-base">${cfg.label}</h3>
-        </div>
-        <div class="divide-y divide-gray-50">${rows}</div>
-      </div>
-    `;
+  const sb=SCRIPT_URL
+    ?'<span class="sync-b sync-on"><span class="sdot"></span>Sincroniza con Google Sheets</span>'
+    :'<span class="sync-b sync-local"><span class="sdot"></span>Guardado local · sin sync</span>';
+  let h=`<div style="text-align:center;margin-bottom:1rem">${sb}</div>
+    <p style="font-size:.72rem;color:rgba(255,255,255,.38);text-align:center;margin-bottom:1.6rem">Haz clic en cada tarea para marcarla como completada</p>`;
+  Object.entries(cats).forEach(([k,cat])=>{
+    const items=d.checklist.filter(c=>c.categoria===k);
+    if(!items.length)return;
+    h+=`<div class="cl-cat"><div class="cl-cat-t" style="color:${cat.c}">${cat.l}</div>
+      ${items.map(item=>{
+        const gi=d.checklist.indexOf(item);
+        const done=state[gi]==='confirmado'||item.estado==='confirmado';
+        return `<div class="cli${done?' done':''}" onclick="toggleCl(${gi})" data-gi="${gi}">
+          <div class="chk">${done?'✓':''}</div>
+          <div class="cl-cnt"><div class="cl-t">${item.tarea}</div><div class="cl-d">${item.detalle}</div></div>
+          <span class="cl-plz">${item.plazo}</span>
+        </div>`;
+      }).join('')}</div>`;
   });
-
-  el.innerHTML = html;
+  $('fp-checklist').innerHTML=h;
 }
+buildCL();
+
+function toggleCl(gi){
+  const state=loadState(),el=document.querySelector(`.cli[data-gi="${gi}"]`);
+  if(!el)return;
+  const done=el.classList.contains('done'),nuevo=done?'pendiente':'confirmado';
+  el.classList.toggle('done',!done);
+  el.querySelector('.chk').textContent=done?'':'✓';
+  state[gi]=nuevo;saveState(state);syncSheet(gi,nuevo);
+}
+
+// ── TABS ─────────────────────────────────────────────────
+function setTab(name){
+  const names=['resumen','reparto','itinerario','transporte','reservas','checklist'];
+  document.querySelectorAll('.ftab').forEach((t,i)=>t.classList.toggle('on',names[i]===name));
+  document.querySelectorAll('.fpanel').forEach(p=>p.classList.remove('on'));
+  $('fp-'+name).classList.add('on');
+  setTimeout(()=>$('financiero').scrollIntoView({behavior:'smooth'}),50);
+}
+
+// ── SCROLL ANIMATIONS ────────────────────────────────────
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target)}})},{threshold:.08});
+document.querySelectorAll('.fade,.pday').forEach(el=>obs.observe(el));
+
+// ── HEADER AUTOHIDE ──────────────────────────────────────
+let lastY=0;const hdr=$('hdr');
+window.addEventListener('scroll',()=>{
+  const y=window.scrollY;
+  hdr.style.transform=y>lastY&&y>120?'translateY(-100%)':'translateY(0)';
+  lastY=y;
+  ['inicio','paris','disneyland','financiero'].forEach(id=>{
+    const s=document.getElementById(id);if(!s)return;
+    const top=s.offsetTop-80;
+    document.querySelector(`nav a[href="#${id}"]`)?.classList.toggle('on',y>=top&&y<top+s.offsetHeight);
+  });
+},{passive:true});
 </script>
 </body>
 </html>
