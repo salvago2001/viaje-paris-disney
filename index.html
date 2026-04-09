@@ -608,10 +608,11 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLb()});
 
 // Captura de clics en imágenes (capture phase = antes que el <a> pueda navegar)
 document.addEventListener('click', e => {
-  const pi  = e.target.closest('.pi img');      // fotos de días París
-  const att = e.target.closest('.att-img img'); // fotos atracciones Disney
-  if (pi) {
-    openLb(pi.src, pi.alt);
+  const piWrap = e.target.closest('.pi');         // contenedor foto París (img + overlay)
+  const att    = e.target.closest('.att-img img'); // fotos atracciones Disney
+  if (piWrap) {
+    const img = piWrap.querySelector('img');
+    if (img) openLb(img.src, img.alt);
   } else if (att) {
     e.preventDefault();
     e.stopPropagation();
