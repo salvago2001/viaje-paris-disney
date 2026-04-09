@@ -34,9 +34,9 @@ body{font-family:'Montserrat',sans-serif;background:var(--light);color:var(--tex
 /* ── HEADER ── */
 /* El color #160930 coincide exactamente con el fondo del logo ViajeaParis */
 #hdr{position:fixed;top:0;left:0;right:0;z-index:900;background:#160930;border-bottom:1px solid rgba(245,166,35,.18);transition:transform .3s}
-.hdr-in{max-width:1400px;margin:0 auto;padding:0 2rem;height:114px;display:flex;align-items:center;overflow:hidden}
+.hdr-in{max-width:1400px;margin:0 auto;padding:0 2rem;height:130px;display:flex;align-items:center;overflow:hidden}
 .logo{text-decoration:none;display:flex;align-items:center;flex-shrink:0;margin-right:auto;height:100%;overflow:hidden}
-.logo img{height:100px;width:auto;max-width:none;display:block;object-fit:contain}
+.logo img{width:350px;height:110px;object-fit:contain;display:block}
 .logo-text{font-weight:900;font-size:1.1rem;color:var(--gold);letter-spacing:.5px}
 .logo-text em{color:#fff;font-style:normal}
 
@@ -49,7 +49,7 @@ body{font-family:'Montserrat',sans-serif;background:var(--light);color:var(--tex
 
 /* Menú desplegable */
 .nav-drop{
-  position:fixed;top:114px;left:0;right:0;
+  position:fixed;top:130px;left:0;right:0;
   background:#160930;
   border-bottom:1px solid rgba(245,166,35,.2);
   box-shadow:0 8px 32px rgba(0,0,0,.5);
@@ -88,7 +88,7 @@ body{font-family:'Montserrat',sans-serif;background:var(--light);color:var(--tex
   position:relative;min-height:100vh;
   display:flex;flex-direction:column;
   align-items:center;justify-content:center;
-  padding:114px 1.5rem 4rem;
+  padding:130px 1.5rem 4rem;
   overflow:hidden;
   background:#08163d;
 }
@@ -273,6 +273,79 @@ footer a:hover{color:var(--gold)}
   <!-- Luna / Noches Disney -->
   <symbol id="ico-moon" viewBox="0 0 24 24">
     <path stroke="currentColor" fill="none" d="M21 12.8A9 9 0 1111.2 3 7 7 0 0021 12.8z"/>
+  </symbol>
+  <!-- Gráfico / Resumen -->
+  <symbol id="ico-chart" viewBox="0 0 24 24">
+    <rect stroke="currentColor" fill="none" x="3" y="12" width="4" height="9"/>
+    <rect stroke="currentColor" fill="none" x="10" y="7" width="4" height="14"/>
+    <rect stroke="currentColor" fill="none" x="17" y="3" width="4" height="18"/>
+    <line stroke="currentColor" fill="none" x1="2" y1="21" x2="22" y2="21"/>
+  </symbol>
+  <!-- Dinero / Reparto -->
+  <symbol id="ico-cash" viewBox="0 0 24 24">
+    <rect stroke="currentColor" fill="none" x="2" y="6" width="20" height="12" rx="2"/>
+    <circle stroke="currentColor" fill="none" cx="12" cy="12" r="3"/>
+    <line stroke="currentColor" fill="none" x1="6" y1="6" x2="6" y2="18"/>
+    <line stroke="currentColor" fill="none" x1="18" y1="6" x2="18" y2="18"/>
+  </symbol>
+  <!-- Tren / Transporte -->
+  <symbol id="ico-train" viewBox="0 0 24 24">
+    <rect stroke="currentColor" fill="none" x="4" y="2" width="16" height="16" rx="3"/>
+    <line stroke="currentColor" fill="none" x1="4" y1="10" x2="20" y2="10"/>
+    <line stroke="currentColor" fill="none" x1="12" y1="2" x2="12" y2="10"/>
+    <path stroke="currentColor" fill="none" d="M8 18l-2 4M16 18l2 4"/>
+    <circle stroke="currentColor" fill="none" cx="8" cy="14" r="1.5"/>
+    <circle stroke="currentColor" fill="none" cx="16" cy="14" r="1.5"/>
+  </symbol>
+  <!-- Portapapeles / Reservas -->
+  <symbol id="ico-clipboard" viewBox="0 0 24 24">
+    <path stroke="currentColor" fill="none" d="M9 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2h-4"/>
+    <rect stroke="currentColor" fill="none" x="9" y="1" width="6" height="4" rx="1"/>
+    <line stroke="currentColor" fill="none" x1="9" y1="12" x2="15" y2="12"/>
+    <line stroke="currentColor" fill="none" x1="9" y1="16" x2="13" y2="16"/>
+  </symbol>
+  <!-- Check círculo / Checklist -->
+  <symbol id="ico-checkcircle" viewBox="0 0 24 24">
+    <circle stroke="currentColor" fill="none" cx="12" cy="12" r="10"/>
+    <path stroke="currentColor" fill="none" d="M7 12l4 4 6-8"/>
+  </symbol>
+  <!-- Tarjeta / Pagos -->
+  <symbol id="ico-card" viewBox="0 0 24 24">
+    <rect stroke="currentColor" fill="none" x="2" y="5" width="20" height="14" rx="2"/>
+    <line stroke="currentColor" fill="none" x1="2" y1="10" x2="22" y2="10"/>
+    <line stroke="currentColor" fill="none" x1="6" y1="15" x2="10" y2="15"/>
+  </symbol>
+  <!-- Info / Notas -->
+  <symbol id="ico-info" viewBox="0 0 24 24">
+    <circle stroke="currentColor" fill="none" cx="12" cy="12" r="10"/>
+    <line stroke="currentColor" fill="none" x1="12" y1="16" x2="12" y2="12"/>
+    <line stroke="currentColor" fill="none" x1="12" y1="8" x2="12.01" y2="8"/>
+  </symbol>
+  <!-- Maleta / Antes de salir -->
+  <symbol id="ico-bag" viewBox="0 0 24 24">
+    <rect stroke="currentColor" fill="none" x="2" y="7" width="20" height="14" rx="2"/>
+    <path stroke="currentColor" fill="none" d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/>
+    <line stroke="currentColor" fill="none" x1="12" y1="12" x2="12" y2="16"/>
+    <line stroke="currentColor" fill="none" x1="10" y1="14" x2="14" y2="14"/>
+  </symbol>
+  <!-- Avión / Orly -->
+  <symbol id="ico-plane" viewBox="0 0 24 24">
+    <path stroke="currentColor" fill="none" d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+  </symbol>
+  <!-- Alerta / Urgente -->
+  <symbol id="ico-alert" viewBox="0 0 24 24">
+    <path stroke="currentColor" fill="none" d="M10.3 3.9L1.8 18a2 2 0 001.7 3h16.9a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z"/>
+    <line stroke="currentColor" fill="none" x1="12" y1="9" x2="12" y2="13"/>
+    <line stroke="currentColor" fill="none" x1="12" y1="17" x2="12.01" y2="17"/>
+  </symbol>
+  <!-- Reloj / Próximo -->
+  <symbol id="ico-clock" viewBox="0 0 24 24">
+    <circle stroke="currentColor" fill="none" cx="12" cy="12" r="10"/>
+    <path stroke="currentColor" fill="none" d="M12 7v5l3 3"/>
+  </symbol>
+  <!-- Flecha izquierda / Volver -->
+  <symbol id="ico-arrowleft" viewBox="0 0 24 24">
+    <path stroke="currentColor" fill="none" d="M19 12H5M12 5l-7 7 7 7"/>
   </symbol>
 </svg>
 
