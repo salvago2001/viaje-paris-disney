@@ -535,7 +535,7 @@ tick();setInterval(tick,1000);
   days.forEach((day,i)=>{
     const acts=day.actividades.slice(0,4);
     c.innerHTML+=`<div class="pday fade${i%2===1?' flip':''}">
-      <div class="pi"><img src="${imgs[i]}" alt="${day.etapa}" loading="lazy" onclick="openLb('${imgs[i]}','${day.etapa}')"><div class="pi-ov"></div></div>
+      <div class="pi"><img src="${imgs[i]}" alt="${day.etapa}" loading="lazy" style="cursor:pointer"><div class="pi-ov"></div></div>
       <div class="pc">
         <span class="dbadge">${day.dia} · ${day.etapa}</span>
         <h3>${day.dia}</h3>
@@ -581,7 +581,7 @@ tick();setInterval(tick,1000);
   ];
   $('att-grid').innerHTML=atts.map(a=>`
     <a href="${a.l}" target="_blank" rel="noopener" class="att">
-      <div class="att-img"><img src="${a.img}" alt="${a.t}" loading="lazy" onclick="event.preventDefault();event.stopPropagation();openLb('${a.img}','${a.t}')" style="cursor:pointer"><span class="att-bdg">${a.b}</span></div>
+      <div class="att-img"><img src="${a.img}" alt="${a.t}" loading="lazy" style="cursor:pointer"><span class="att-bdg">${a.b}</span></div>
       <div class="att-body">
         <svg class="att-ico"><use href="#${a.ico}"/></svg>
         <div class="att-tit">${a.t}</div>
@@ -605,6 +605,19 @@ function openLb(src,cap){
 }
 function closeLb(){$('lb').classList.remove('open');document.body.style.overflow='';}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLb()});
+
+// Captura de clics en imágenes (capture phase = antes que el <a> pueda navegar)
+document.addEventListener('click', e => {
+  const pi  = e.target.closest('.pi img');      // fotos de días París
+  const att = e.target.closest('.att-img img'); // fotos atracciones Disney
+  if (pi) {
+    openLb(pi.src, pi.alt);
+  } else if (att) {
+    e.preventDefault();
+    e.stopPropagation();
+    openLb(att.src, att.alt);
+  }
+}, true); // true = capture phase
 
 // ── HEADER AUTOHIDE ──────────────────────────────────────
 let lastY=0;const hdr=$('hdr');
