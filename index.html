@@ -193,10 +193,41 @@ footer a:hover{color:var(--gold)}
 #lb-close{position:absolute;top:-2.8rem;right:0;background:none;border:none;color:#fff;font-size:2rem;cursor:pointer;line-height:1;padding:0 .4rem;opacity:.8;transition:opacity .2s}
 #lb-close:hover{opacity:1}
 @media(max-width:750px){
+  /* ── Header ── */
+  .hdr-in{height:70px;overflow:visible}
+  .logo img{width:185px;height:50px}
+  .hdr-date{display:none}
+  .nav-drop{top:70px}
+
+  /* ── Hero ── */
+  #inicio{padding:80px 1.2rem 3rem;min-height:100svh}
+  .heye{font-size:.9rem;letter-spacing:2px;margin-bottom:.7rem}
+  .htit{font-size:clamp(2rem,9.5vw,2.8rem);white-space:normal}
+  .hsub{font-size:.88rem;letter-spacing:1px;margin-bottom:1.3rem}
+
+  /* ── Hero stats ── */
+  .hstats{gap:1rem;margin-bottom:1.3rem}
+  .hst .n{font-size:1.9rem}
+  .hst .l{font-size:.57rem;letter-spacing:1.5px}
+
+  /* ── Countdown: cuadrícula 2×2 estable ── */
+  .cdown{
+    display:grid;grid-template-columns:1fr 1fr;
+    gap:.6rem;
+    max-width:280px;margin-left:auto;margin-right:auto;
+    margin-bottom:1.5rem
+  }
+  .ci{padding:.65rem .8rem;min-width:0}
+  .ci .n{font-size:2.5rem}
+
+  /* ── París ── */
+  #paris{padding:60px 0 45px}
   .pday,.pday.flip{grid-template-columns:1fr}
   .pday.flip .pi,.pday.flip .pc{order:unset}
-  .hstats{gap:1.5rem}
-  .cdown{gap:.75rem}
+
+  /* ── Disney ── */
+  #disneyland{padding:60px 0 45px}
+  .att-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
