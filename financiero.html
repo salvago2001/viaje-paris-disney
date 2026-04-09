@@ -14,10 +14,20 @@ html{scroll-behavior:smooth;font-size:16px}
 body{font-family:'Montserrat',sans-serif;background:var(--light);color:var(--text);overflow-x:hidden}
 
 /* HEADER */
-#hdr{position:sticky;top:0;z-index:900;background:#160930;border-bottom:1px solid rgba(245,166,35,.18)}
-.hdr-in{max-width:1400px;margin:0 auto;padding:0 2rem;height:350px;display:flex;align-items:center;overflow:hidden;gap:1.5rem}
+#hdr{position:sticky;top:0;z-index:900;background:#10031f;border-bottom:1px solid rgba(245,166,35,.18)}
+.hdr-in{max-width:1400px;margin:0 auto;padding:0 2rem;height:250px;display:flex;align-items:center;overflow:hidden;gap:1.5rem}
 .logo{text-decoration:none;display:flex;align-items:center;flex-shrink:0;margin-right:auto}
-.logo img{height:300px;width:auto;object-fit:contain;display:block}
+.logo img{height:210px;width:auto;object-fit:contain;display:block}
+/* Hamburguesa */
+.ham{background:none;border:none;cursor:pointer;display:flex;flex-direction:column;justify-content:center;gap:6px;padding:8px;flex-shrink:0}
+.ham span{display:block;width:28px;height:2.5px;background:rgba(255,255,255,.85);border-radius:2px;transition:all .3s}
+.ham.open span:nth-child(1){transform:rotate(45deg) translate(6px,6px)}
+.ham.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.ham.open span:nth-child(3){transform:rotate(-45deg) translate(6px,-6px)}
+.nav-drop{position:fixed;top:250px;left:0;right:0;background:#10031f;border-bottom:1px solid rgba(245,166,35,.2);box-shadow:0 8px 32px rgba(0,0,0,.5);display:none;z-index:899;padding:.6rem 0}
+.nav-drop.open{display:block}
+.nav-drop a{display:flex;align-items:center;justify-content:center;padding:.8rem 2rem;color:rgba(255,255,255,.82);text-decoration:none;font-size:1rem;font-weight:700;letter-spacing:.5px;transition:all .2s}
+.nav-drop a:hover{color:var(--gold);background:rgba(245,166,35,.06)}
 .logo-txt{font-weight:900;font-size:1rem;color:var(--gold);letter-spacing:.5px}
 .logo-txt em{color:#fff;font-style:normal}
 .back{display:inline-flex;align-items:center;gap:.4rem;color:rgba(255,255,255,.7);text-decoration:none;font-size:.85rem;font-weight:700;padding:.4rem .7rem;border-radius:6px;transition:all .2s;flex-shrink:0;white-space:nowrap}
@@ -273,8 +283,17 @@ footer a:hover{color:var(--gold)}
     </a>
     <a href="index.html" class="back"><svg class="nav-ico"><use href="#ico-arrowleft"/></svg>Volver</a>
     <span class="hdr-date">7–13 Sep 2026</span>
+    <button class="ham" id="ham" onclick="toggleMenu()" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
+<div class="nav-drop" id="nav-drop">
+  <a href="index.html#inicio"><svg class="nav-ico"><use href="#ico-home"/></svg>Inicio</a>
+  <a href="index.html#paris"><svg class="nav-ico"><use href="#ico-paris"/></svg>París</a>
+  <a href="index.html#disneyland"><svg class="nav-ico"><use href="#ico-disney"/></svg>Disneyland</a>
+  <a href="financiero.html"><svg class="nav-ico"><use href="#ico-euro"/></svg>Financiero</a>
+</div>
 
 <!-- HERO -->
 <div class="fin-hero">
@@ -362,7 +381,7 @@ function actIco(t){
       ${d.financiero.gastos.map(g=>`
         <div style="margin-bottom:1.2rem">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.6rem">
-            <span style="font-weight:900;color:var(--text);font-size:.95rem">${g.concepto}</span>
+            <span style="font-weight:900;color:var(--text);font-size:.95rem;display:flex;align-items:center;gap:.4rem">${(({id,text})=>`<svg style="width:1.1rem;height:1.1rem;flex-shrink:0;stroke:var(--navy);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;overflow:visible"><use href="#${id}"/></svg>${text}`)(actIco(g.concepto))}</span>
             <span style="font-weight:900;color:var(--navy)">${eur(g.total)}</span>
           </div>
           <div style="font-size:.66rem;color:var(--faint);margin-bottom:.6rem">Ref: ${g.referencia}</div>
@@ -481,6 +500,11 @@ function toggleCl(gi){
   el.querySelector('.chk').textContent=done?'':'✓';
   state[gi]=nuevo;saveState(state);syncSheet(gi,nuevo);
 }
+
+// ── HAMBURGER ────────────────────────────────────────────
+function toggleMenu(){const h=$('ham'),d=$('nav-drop'),o=!h.classList.contains('open');h.classList.toggle('open',o);d.classList.toggle('open',o)}
+function closeMenu(){$('ham').classList.remove('open');$('nav-drop').classList.remove('open')}
+document.addEventListener('click',e=>{if(!e.target.closest('#ham')&&!e.target.closest('#nav-drop'))closeMenu()});
 
 // ── TABS ─────────────────────────────────────────────────
 function setTab(name){
