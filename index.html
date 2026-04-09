@@ -34,14 +34,14 @@ body{font-family:'Montserrat',sans-serif;background:var(--light);color:var(--tex
 /* ── HEADER ── */
 /* El color #160930 coincide exactamente con el fondo del logo ViajeaParis */
 #hdr{position:fixed;top:0;left:0;right:0;z-index:900;background:#160930;border-bottom:1px solid rgba(245,166,35,.18);transition:transform .3s}
-.hdr-in{max-width:1400px;margin:0 auto;padding:0 2rem;height:74px;display:flex;align-items:center;gap:1.5rem}
-.logo{text-decoration:none;display:flex;align-items:center;flex-shrink:0}
-.logo img{max-width:220px;height:auto;display:block;object-fit:contain}
+.hdr-in{max-width:1400px;margin:0 auto;padding:0 2rem;height:74px;display:flex;align-items:center;overflow:hidden}
+.logo{text-decoration:none;display:flex;align-items:center;flex-shrink:0;margin-right:auto;height:100%;overflow:hidden}
+.logo img{height:62px;width:auto;max-width:none;display:block;object-fit:contain}
 .logo-text{font-weight:900;font-size:1.1rem;color:var(--gold);letter-spacing:.5px}
 .logo-text em{color:#fff;font-style:normal}
 
 /* Hamburguesa */
-.ham{background:none;border:none;cursor:pointer;display:flex;flex-direction:column;justify-content:center;gap:6px;padding:8px;margin-left:auto;flex-shrink:0}
+.ham{background:none;border:none;cursor:pointer;display:flex;flex-direction:column;justify-content:center;gap:6px;padding:8px;margin-left:.75rem;flex-shrink:0}
 .ham span{display:block;width:28px;height:2.5px;background:rgba(255,255,255,.85);border-radius:2px;transition:all .3s}
 .ham.open span:nth-child(1){transform:rotate(45deg) translate(6px,6px)}
 .ham.open span:nth-child(2){opacity:0;transform:scaleX(0)}
