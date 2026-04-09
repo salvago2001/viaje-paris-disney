@@ -34,9 +34,9 @@ body{font-family:'Montserrat',sans-serif;background:var(--light);color:var(--tex
 /* ── HEADER ── */
 /* El color #160930 coincide exactamente con el fondo del logo ViajeaParis */
 #hdr{position:fixed;top:0;left:0;right:0;z-index:900;background:#160930;border-bottom:1px solid rgba(245,166,35,.18);transition:transform .3s}
-.hdr-in{max-width:1400px;margin:0 auto;padding:0 2rem;height:74px;display:flex;align-items:center;overflow:hidden}
+.hdr-in{max-width:1400px;margin:0 auto;padding:0 2rem;height:114px;display:flex;align-items:center;overflow:hidden}
 .logo{text-decoration:none;display:flex;align-items:center;flex-shrink:0;margin-right:auto;height:100%;overflow:hidden}
-.logo img{height:62px;width:auto;max-width:none;display:block;object-fit:contain}
+.logo img{height:100px;width:auto;max-width:none;display:block;object-fit:contain}
 .logo-text{font-weight:900;font-size:1.1rem;color:var(--gold);letter-spacing:.5px}
 .logo-text em{color:#fff;font-style:normal}
 
@@ -49,21 +49,23 @@ body{font-family:'Montserrat',sans-serif;background:var(--light);color:var(--tex
 
 /* Menú desplegable */
 .nav-drop{
-  position:fixed;top:74px;left:0;right:0;
+  position:fixed;top:114px;left:0;right:0;
   background:#160930;
   border-bottom:1px solid rgba(245,166,35,.2);
   box-shadow:0 8px 32px rgba(0,0,0,.5);
   display:none;z-index:899;
-  padding:.75rem 0;
+  padding:.6rem 0;
 }
 .nav-drop.open{display:block}
 .nav-drop a{
-  display:block;padding:.85rem 2.5rem;
+  display:block;padding:.8rem 2rem;
   color:rgba(255,255,255,.82);text-decoration:none;
-  font-size:1rem;font-weight:700;letter-spacing:.3px;
-  transition:all .2s;border-left:3px solid transparent;
+  font-size:1rem;font-weight:700;letter-spacing:.5px;
+  transition:all .2s;
+  text-align:center;
+  border-bottom:2px solid transparent;
 }
-.nav-drop a:hover,.nav-drop a.on{color:var(--gold);background:rgba(245,166,35,.07);border-left-color:var(--gold)}
+.nav-drop a:hover,.nav-drop a.on{color:var(--gold);background:rgba(245,166,35,.06);}
 .hdr-date{font-size:.78rem;color:var(--gold);opacity:.75;font-weight:700;white-space:nowrap;margin-right:.5rem}
 
 /* ── LAYOUT ── */
@@ -81,7 +83,7 @@ body{font-family:'Montserrat',sans-serif;background:var(--light);color:var(--tex
   position:relative;min-height:100vh;
   display:flex;flex-direction:column;
   align-items:center;justify-content:center;
-  padding:80px 1.5rem 4rem;
+  padding:114px 1.5rem 4rem;
   overflow:hidden;
   background:#08163d;
 }
@@ -108,15 +110,16 @@ body{font-family:'Montserrat',sans-serif;background:var(--light);color:var(--tex
   display:none;flex-direction:column;align-items:center;justify-content:center;
   color:rgba(245,166,35,.4);font-size:.9rem;font-weight:700;letter-spacing:2px;gap:.6rem
 }
-.hz{position:relative;z-index:2;text-align:center;max-width:860px;width:100%}
+.hz{position:relative;z-index:2;text-align:center;max-width:1100px;width:100%;overflow:hidden}
 .heye{font-size:1.9rem;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;font-weight:700;text-shadow:0 1px 10px rgba(0,0,0,.6)}
 .htit{
   font-family:'Dancing Script',cursive;
-  font-size:clamp(6.5rem,18vw,11rem);font-weight:700;line-height:1.05;
+  font-size:clamp(3rem, 6.8vw, 5.8rem);font-weight:700;line-height:1.1;
+  white-space:nowrap;
   background:linear-gradient(130deg,#fff 30%,var(--gold));
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
   margin-bottom:.5rem;
-  padding-bottom:.18em; /* espacio para los descenders (g, y, p…) */
+  padding-bottom:.2em; /* espacio para los descenders (g, y, p…) */
   filter:drop-shadow(0 2px 20px rgba(0,0,0,.55));
 }
 .hsub{font-size:clamp(1.4rem,3.8vw,2rem);color:rgba(255,255,255,.82);margin-bottom:2rem;font-weight:300;letter-spacing:3px;text-shadow:0 1px 8px rgba(0,0,0,.7)}
@@ -309,11 +312,10 @@ tick();setInterval(tick,1000);
 
 // ── PARIS SECTION ────────────────────────────────────────
 !function(){
-  // Imágenes verificadas: Llegada, Louvre (≠Eiffel), Sacré-Cœur (≠oficinas)
   const imgs=[
-    'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=900&q=80',
-    'https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=900&q=80',
-    'https://images.unsplash.com/photo-1549144511-f099e773c147?w=900&q=80',
+    'img/paris-dia1.jpg',
+    'img/paris-dia2.jpg',
+    'img/paris-dia3.jpg',
   ];
   const days=window.VIAJE_DATA.itinerario.slice(0,3);
   const c=$('pdays');
@@ -340,29 +342,29 @@ tick();setInterval(tick,1000);
 !function(){
   const atts=[
     {t:'🐀 Ratatouille: La Aventura',p:'Walt Disney Studios',b:'PRIORIDAD MÁXIMA',
-     img:'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=700&q=80',
+     img:'img/att-ratatouille.jpg',
      d:'La más popular del parque. Conviértete en Rémy y escápate por el restaurante Gusteau. Colas de 50+ min.',
      l:'https://www.disneylandparis.com/es-es/atracciones/walt-disney-studios-park/ratatouille-the-adventure/'},
-    {t:'🎢 Big Thunder Mountain',p:'Disneyland Park',b:'CLÁSICO',
-     img:'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=700&q=80',
+    {t:'🎢 Big Thunder Mountain',p:'Parque Disneyland',b:'CLÁSICO',
+     img:'img/att-bigthunder.jpg',
      d:'La montaña más salvaje del Oeste. Tren desbocado entre cañones y minas abandonadas. Para Jairo y adultos.',
-     l:'https://www.disneylandparis.com/es-es/atracciones/disneyland-park/big-thunder-mountain/'},
+     l:'https://www.disneylandparis.com/es-es/atracciones/parque-disneyland/big-thunder-mountain'},
     {t:'🚗 Cars: Quatre Roues Rallye',p:'Walt Disney Studios',b:'TODOS ✅',
-     img:'https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=700&q=80',
+     img:'img/att-cars.jpg',
      d:'Compite con Rayo McQueen en un circuito de giros y piruetas. Arion e Izhan la adoran.',
      l:'https://www.disneylandparis.com/es-es/atracciones/walt-disney-studios-park/cars-quatre-roues-rallye/'},
     {t:'⚡ Avengers Campus',p:'Walt Disney Studios',b:'SUPERHEROES',
-     img:'https://images.unsplash.com/photo-1635805737707-575885ab0820?w=700&q=80',
+     img:'img/att-avengers.jpg',
      d:'Únete a los Avengers con Spider-Man en una misión de alto secreto.',
      l:'https://www.disneylandparis.com/es-es/atracciones/walt-disney-studios-park/avengers-assemble-flight-force/'},
-    {t:'⚓ Piratas del Caribe',p:'Disneyland Park',b:'CLÁSICO',
-     img:'https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?w=700&q=80',
+    {t:'⚓ Pirates Beach',p:'Parque Disneyland',b:'CLÁSICO',
+     img:'img/att-piratas.jpg',
      d:'Navega junto a los piratas más famosos en esta aventura acuática. Todos la disfrutarán.',
-     l:'https://www.disneylandparis.com/es-es/atracciones/disneyland-park/pirates-of-the-caribbean/'},
-    {t:'✨ Disney Illuminations',p:'Disneyland Park · Noche',b:'NO PERDÉRSELO',
-     img:'https://images.unsplash.com/photo-1467987506553-8f3916508521?w=700&q=80',
+     l:'https://www.disneylandparis.com/es-es/atracciones/parque-disneyland/pirates-beach'},
+    {t:'✨ Espectáculos y Cabalgatas',p:'Parque Disneyland · Noche',b:'NO PERDÉRSELO',
+     img:'img/att-show.jpg',
      d:'El espectáculo nocturno más mágico de Europa. Fuegos artificiales y proyecciones sobre el Castillo.',
-     l:'https://www.disneylandparis.com/es-es/entretenimiento/disneyland-park/disney-illuminations/'},
+     l:'https://www.disneylandparis.com/es-es/entretenimiento/espectaculos-y-cabalgatas'},
   ];
   $('att-grid').innerHTML=atts.map(a=>`
     <a href="${a.l}" target="_blank" rel="noopener" class="att">
