@@ -157,6 +157,7 @@ body{font-family:'Montserrat',sans-serif;background:var(--light);color:var(--tex
 .ai{display:flex;gap:.7rem;align-items:flex-start;font-size:.9rem;color:var(--text-mid);line-height:1.5}
 .ai strong{color:var(--text-dark)}
 .ai .cost{color:#c17e00;font-size:.8rem;font-weight:700}
+.ai-ico{display:block;width:1.1rem;height:1.1rem;flex-shrink:0;stroke:var(--navy-dark);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none;overflow:visible;margin-top:.2rem}
 
 /* ── DISNEY (fondo OSCURO — mantiene look mágico) ── */
 #disneyland{background:var(--navy-dark);color:#fff;padding:100px 0 80px}
@@ -402,7 +403,7 @@ footer a:hover{color:var(--gold)}
   <div class="cnt">
     <div class="sh fade">
       <div class="slbl">La Ciudad de la Luz</div>
-      <h2>🗼 París</h2>
+      <h2><svg style="display:inline-block;width:.85em;height:.85em;vertical-align:-.1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;overflow:visible"><use href="#ico-paris"/></svg> París</h2>
       <div class="gline"></div>
       <p class="ssub">Lunes 7 → Miércoles 9 de Septiembre</p>
     </div>
@@ -415,7 +416,7 @@ footer a:hover{color:var(--gold)}
   <div class="cnt">
     <div class="sh fade">
       <div class="slbl">El Reino de la Magia</div>
-      <h2>🏰 Disneyland Paris</h2>
+      <h2><svg style="display:inline-block;width:.85em;height:.85em;vertical-align:-.1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;overflow:visible"><use href="#ico-disney"/></svg> Disneyland Paris</h2>
       <div class="gline"></div>
       <p class="ssub">Miércoles 9 → Domingo 13 · Explorers Hotel · 4 días / 2 parques</p>
     </div>
@@ -433,6 +434,40 @@ footer a:hover{color:var(--gold)}
 <script>
 // ── helpers ──────────────────────────────────────────────
 const $=id=>document.getElementById(id);
+
+// Mapea el emoji del título de actividad → id de icono SVG
+function actIco(t){
+  const M={
+    '🚂':'train','🚄':'train','🚇':'train','🚌':'train','🚐':'train','🚋':'train','🚆':'train',
+    '✈':'plane','🛫':'plane','🛬':'plane',
+    '🏠':'home','🏨':'home','🏩':'home',
+    '🗼':'paris',
+    '🏰':'disney','🎢':'disney','🎡':'disney','🎠':'disney',
+    '🍽':'info','🍝':'info','🥘':'info','🍕':'info','☕':'info','🍴':'info','🍜':'info',
+    '🌙':'moon','🌃':'moon','🌆':'moon','🌉':'moon',
+    '🚶':'users','👨':'users','👪':'users',
+    '💶':'euro','💰':'cash','💳':'card',
+    '🎫':'checkcircle','✅':'checkcircle',
+    '📍':'mappin','📌':'mappin','🗺':'mappin','🌍':'mappin',
+    '🛍':'bag','🧳':'bag',
+    '🚗':'car','🚕':'car','🚙':'car',
+    '⚡':'lightning','🦸':'lightning',
+    '⚓':'anchor',
+    '✨':'sparkle','🎆':'sparkle','🎉':'sparkle','🎇':'sparkle',
+    '🦁':'mappin','🐘':'mappin',
+    '🎭':'sparkle','🎪':'sparkle',
+    '🏛':'mappin',
+  };
+  // Extract first emoji (handles surrogate pairs U+1F000+)
+  const c=t.charCodeAt(0);
+  let ec,rest;
+  if(c>=0xD800&&c<=0xDBFF){ec=t.slice(0,2);rest=t.slice(2);}
+  else{ec=t.slice(0,1);rest=t.slice(1);}
+  if(rest.charCodeAt(0)===0xFE0F)rest=rest.slice(1); // strip variation selector
+  rest=rest.replace(/^\s+/,'');
+  const id='ico-'+(M[ec]||'mappin');
+  return {id,text:rest||t};
+}
 
 // ── HAMBURGER MENU ───────────────────────────────────────
 function toggleMenu(){
@@ -487,12 +522,12 @@ tick();setInterval(tick,1000);
       <div class="pc">
         <span class="dbadge">${day.dia} · ${day.etapa}</span>
         <h3>${day.dia}</h3>
-        <ul class="alist">${acts.map(a=>`<li class="ai">
-          <span style="flex-shrink:0">${a.titulo.slice(0,2)}</span>
-          <span><strong>${a.titulo.slice(3)}</strong><br>
+        <ul class="alist">${acts.map(a=>{const {id,text}=actIco(a.titulo);return`<li class="ai">
+          <svg class="ai-ico"><use href="#${id}"/></svg>
+          <span><strong>${text}</strong><br>
           <span style="font-size:.78rem;color:rgba(10,24,80,.45)">${a.detalles.slice(0,90)}${a.detalles.length>90?'…':''}</span>
           ${a.coste&&a.coste!=='—'?`<br><span class="cost">${a.coste}</span>`:''}
-          </span></li>`).join('')}</ul>
+          </span></li>`;}).join('')}</ul>
       </div>
     </div>`;
   });
