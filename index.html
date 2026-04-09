@@ -58,15 +58,20 @@ body{font-family:'Montserrat',sans-serif;background:var(--light);color:var(--tex
 }
 .nav-drop.open{display:block}
 .nav-drop a{
-  display:block;padding:.8rem 2rem;
+  display:flex;align-items:center;justify-content:center;
+  padding:.8rem 2rem;
   color:rgba(255,255,255,.82);text-decoration:none;
   font-size:1rem;font-weight:700;letter-spacing:.5px;
   transition:all .2s;
-  text-align:center;
-  border-bottom:2px solid transparent;
 }
 .nav-drop a:hover,.nav-drop a.on{color:var(--gold);background:rgba(245,166,35,.06);}
 .hdr-date{font-size:.78rem;color:var(--gold);opacity:.75;font-weight:700;white-space:nowrap;margin-right:.5rem}
+
+/* ── SVG ICON SYSTEM ── */
+.ico,.nav-ico,.stat-ico,.att-ico{stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none;overflow:visible}
+.nav-ico{display:inline-block;width:1.2rem;height:1.2rem;margin-right:.5rem;vertical-align:middle;flex-shrink:0}
+.stat-ico{display:block;width:1.6rem;height:1.6rem;margin:0 auto .35rem;color:var(--gold)}
+.att-ico{display:block;width:2rem;height:2rem;margin-bottom:.5rem;color:var(--gold)}
 
 /* ── LAYOUT ── */
 .cnt{max-width:1100px;margin:0 auto;padding:0 1.5rem}
@@ -188,6 +193,89 @@ footer a:hover{color:var(--gold)}
 </head>
 <body>
 
+<!-- ══════ SVG SPRITE (iconos planos monocromáticos) ══════ -->
+<svg id="ico-sprite" xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <!-- Inicio / Home -->
+  <symbol id="ico-home" viewBox="0 0 24 24">
+    <path stroke="currentColor" fill="none" d="M3 11.5L12 4l9 7.5V21h-5.5v-5.5h-7V21H3z"/>
+  </symbol>
+  <!-- Torre Eiffel / París -->
+  <symbol id="ico-paris" viewBox="0 0 24 24">
+    <path stroke="currentColor" fill="none" d="M10.5 4h3M11 4l-2 7h6l-2-7M9 11l-2.5 10h11L15 11M8 17h8"/>
+    <line stroke="currentColor" fill="none" x1="12" y1="2" x2="12" y2="4"/>
+  </symbol>
+  <!-- Castillo / Disney -->
+  <symbol id="ico-disney" viewBox="0 0 24 24">
+    <path stroke="currentColor" fill="none" d="M2 22h20M4 22V14h3V9l1-2 1 2v5h2V9l1-2 1 2v5h2V9l1-2 1 2v5h3v8M9 22v-5h6v5"/>
+  </symbol>
+  <!-- Euro / Financiero -->
+  <symbol id="ico-euro" viewBox="0 0 24 24">
+    <circle stroke="currentColor" fill="none" cx="12" cy="12" r="9"/>
+    <path stroke="currentColor" fill="none" d="M15.5 8.5a5 5 0 100 7"/>
+    <line stroke="currentColor" fill="none" x1="7" y1="11" x2="14" y2="11"/>
+    <line stroke="currentColor" fill="none" x1="7" y1="14" x2="14" y2="14"/>
+  </symbol>
+  <!-- Gorro chef / Ratatouille -->
+  <symbol id="ico-chef" viewBox="0 0 24 24">
+    <path stroke="currentColor" fill="none" d="M7 14h10v5H7z"/>
+    <path stroke="currentColor" fill="none" d="M7 14a5 5 0 015-8 5 5 0 015 8"/>
+    <line stroke="currentColor" fill="none" x1="9" y1="19" x2="9" y2="21"/>
+    <line stroke="currentColor" fill="none" x1="12" y1="19" x2="12" y2="21"/>
+    <line stroke="currentColor" fill="none" x1="15" y1="19" x2="15" y2="21"/>
+  </symbol>
+  <!-- Montaña / Big Thunder -->
+  <symbol id="ico-mountain" viewBox="0 0 24 24">
+    <path stroke="currentColor" fill="none" d="M2 21l7-12 4 5 3-5 6 12H2z"/>
+    <line stroke="currentColor" fill="none" x1="17" y1="10" x2="16" y2="7"/>
+  </symbol>
+  <!-- Coche / Cars -->
+  <symbol id="ico-car" viewBox="0 0 24 24">
+    <path stroke="currentColor" fill="none" d="M5.5 17H4a1 1 0 01-1-1v-3l2.5-6h13L21 13v3a1 1 0 01-1 1h-1.5"/>
+    <circle stroke="currentColor" fill="none" cx="7.5" cy="17" r="2"/>
+    <circle stroke="currentColor" fill="none" cx="16.5" cy="17" r="2"/>
+    <line stroke="currentColor" fill="none" x1="9.5" y1="17" x2="14.5" y2="17"/>
+  </symbol>
+  <!-- Rayo / Avengers -->
+  <symbol id="ico-lightning" viewBox="0 0 24 24">
+    <path stroke="currentColor" fill="none" d="M13 2L4 14h7l-2 8 11-12h-7l2-8z"/>
+  </symbol>
+  <!-- Ancla / Pirates -->
+  <symbol id="ico-anchor" viewBox="0 0 24 24">
+    <circle stroke="currentColor" fill="none" cx="12" cy="5" r="2.5"/>
+    <line stroke="currentColor" fill="none" x1="12" y1="7.5" x2="12" y2="20"/>
+    <line stroke="currentColor" fill="none" x1="5" y1="12" x2="19" y2="12"/>
+    <path stroke="currentColor" fill="none" d="M5 12a7 7 0 0014 0"/>
+  </symbol>
+  <!-- Estrella / Espectáculos -->
+  <symbol id="ico-sparkle" viewBox="0 0 24 24">
+    <path stroke="currentColor" fill="none" d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+    <circle stroke="currentColor" fill="none" cx="12" cy="12" r="2.5"/>
+  </symbol>
+  <!-- Calendario / Días -->
+  <symbol id="ico-calendar" viewBox="0 0 24 24">
+    <rect stroke="currentColor" fill="none" x="3" y="4" width="18" height="18" rx="2"/>
+    <line stroke="currentColor" fill="none" x1="16" y1="2" x2="16" y2="6"/>
+    <line stroke="currentColor" fill="none" x1="8" y1="2" x2="8" y2="6"/>
+    <line stroke="currentColor" fill="none" x1="3" y1="10" x2="21" y2="10"/>
+  </symbol>
+  <!-- Pin mapa / Parques -->
+  <symbol id="ico-mappin" viewBox="0 0 24 24">
+    <path stroke="currentColor" fill="none" d="M12 2C8.7 2 6 4.7 6 8c0 5.3 6 14 6 14s6-8.7 6-14c0-3.3-2.7-6-6-6z"/>
+    <circle stroke="currentColor" fill="none" cx="12" cy="8" r="2"/>
+  </symbol>
+  <!-- Familia / Aventureros -->
+  <symbol id="ico-users" viewBox="0 0 24 24">
+    <circle stroke="currentColor" fill="none" cx="9" cy="7" r="3"/>
+    <path stroke="currentColor" fill="none" d="M3 21v-2a6 6 0 0112 0v2"/>
+    <circle stroke="currentColor" fill="none" cx="18" cy="8" r="2.5"/>
+    <path stroke="currentColor" fill="none" d="M21 21v-2a4 4 0 00-5-3.9"/>
+  </symbol>
+  <!-- Luna / Noches Disney -->
+  <symbol id="ico-moon" viewBox="0 0 24 24">
+    <path stroke="currentColor" fill="none" d="M21 12.8A9 9 0 1111.2 3 7 7 0 0021 12.8z"/>
+  </symbol>
+</svg>
+
 <div id="stars"></div>
 
 <!-- ══════ HEADER ══════ -->
@@ -205,10 +293,10 @@ footer a:hover{color:var(--gold)}
   </div>
 </header>
 <div class="nav-drop" id="nav-drop">
-  <a href="#inicio"      onclick="closeMenu()">🏠 Inicio</a>
-  <a href="#paris"       onclick="closeMenu()">🗼 París</a>
-  <a href="#disneyland"  onclick="closeMenu()">🎢 Disneyland</a>
-  <a href="financiero.html">💶 Financiero</a>
+  <a href="#inicio"     onclick="closeMenu()"><svg class="nav-ico"><use href="#ico-home"/></svg>Inicio</a>
+  <a href="#paris"      onclick="closeMenu()"><svg class="nav-ico"><use href="#ico-paris"/></svg>París</a>
+  <a href="#disneyland" onclick="closeMenu()"><svg class="nav-ico"><use href="#ico-disney"/></svg>Disneyland</a>
+  <a href="financiero.html"><svg class="nav-ico"><use href="#ico-euro"/></svg>Financiero</a>
 </div>
 
 <!-- ══════ HERO (foto full-screen) ══════ -->
@@ -225,10 +313,10 @@ footer a:hover{color:var(--gold)}
     <p class="hsub">7 – 13 Septiembre 2026</p>
     <div class="gline"></div>
     <div class="hstats">
-      <div class="hst"><span class="n">7</span><span class="l">Días</span></div>
-      <div class="hst"><span class="n">2</span><span class="l">Parques</span></div>
-      <div class="hst"><span class="n">6</span><span class="l">Aventureros</span></div>
-      <div class="hst"><span class="n">4</span><span class="l">Noches Disney</span></div>
+      <div class="hst"><svg class="stat-ico"><use href="#ico-calendar"/></svg><span class="n">7</span><span class="l">Días</span></div>
+      <div class="hst"><svg class="stat-ico"><use href="#ico-mappin"/></svg><span class="n">2</span><span class="l">Parques</span></div>
+      <div class="hst"><svg class="stat-ico"><use href="#ico-users"/></svg><span class="n">6</span><span class="l">Aventureros</span></div>
+      <div class="hst"><svg class="stat-ico"><use href="#ico-moon"/></svg><span class="n">4</span><span class="l">Noches Disney</span></div>
     </div>
     <div class="cdown" id="cdown"></div>
     <a href="#paris" class="cta">Ver el Plan ✨</a>
@@ -341,27 +429,27 @@ tick();setInterval(tick,1000);
 // Sin Premier Access — todas las imágenes verificadas (sin 404)
 !function(){
   const atts=[
-    {t:'🐀 Ratatouille: La Aventura',p:'Walt Disney Studios',b:'PRIORIDAD MÁXIMA',
+    {t:'Ratatouille: La Aventura',ico:'ico-chef',p:'Walt Disney Studios',b:'PRIORIDAD MÁXIMA',
      img:'img/att-ratatouille.jpg',
      d:'La más popular del parque. Conviértete en Rémy y escápate por el restaurante Gusteau. Colas de 50+ min.',
      l:'https://www.disneylandparis.com/es-es/atracciones/walt-disney-studios-park/ratatouille-the-adventure/'},
-    {t:'🎢 Big Thunder Mountain',p:'Parque Disneyland',b:'CLÁSICO',
+    {t:'Big Thunder Mountain',ico:'ico-mountain',p:'Parque Disneyland',b:'CLÁSICO',
      img:'img/att-bigthunder.jpg',
      d:'La montaña más salvaje del Oeste. Tren desbocado entre cañones y minas abandonadas. Para Jairo y adultos.',
      l:'https://www.disneylandparis.com/es-es/atracciones/parque-disneyland/big-thunder-mountain'},
-    {t:'🚗 Cars: Quatre Roues Rallye',p:'Walt Disney Studios',b:'TODOS ✅',
+    {t:'Cars: Quatre Roues Rallye',ico:'ico-car',p:'Walt Disney Studios',b:'TODOS',
      img:'img/att-cars.jpg',
      d:'Compite con Rayo McQueen en un circuito de giros y piruetas. Arion e Izhan la adoran.',
      l:'https://www.disneylandparis.com/es-es/atracciones/walt-disney-studios-park/cars-quatre-roues-rallye/'},
-    {t:'⚡ Avengers Campus',p:'Walt Disney Studios',b:'SUPERHEROES',
+    {t:'Avengers Campus',ico:'ico-lightning',p:'Walt Disney Studios',b:'SUPERHEROES',
      img:'img/att-avengers.jpg',
      d:'Únete a los Avengers con Spider-Man en una misión de alto secreto.',
      l:'https://www.disneylandparis.com/es-es/atracciones/walt-disney-studios-park/avengers-assemble-flight-force/'},
-    {t:'⚓ Pirates Beach',p:'Parque Disneyland',b:'CLÁSICO',
+    {t:'Pirates Beach',ico:'ico-anchor',p:'Parque Disneyland',b:'CLÁSICO',
      img:'img/att-piratas.jpg',
      d:'Navega junto a los piratas más famosos en esta aventura acuática. Todos la disfrutarán.',
      l:'https://www.disneylandparis.com/es-es/atracciones/parque-disneyland/pirates-beach'},
-    {t:'✨ Espectáculos y Cabalgatas',p:'Parque Disneyland · Noche',b:'NO PERDÉRSELO',
+    {t:'Espectáculos y Cabalgatas',ico:'ico-sparkle',p:'Parque Disneyland · Noche',b:'NO PERDÉRSELO',
      img:'img/att-show.jpg',
      d:'El espectáculo nocturno más mágico de Europa. Fuegos artificiales y proyecciones sobre el Castillo.',
      l:'https://www.disneylandparis.com/es-es/entretenimiento/espectaculos-y-cabalgatas'},
@@ -370,8 +458,9 @@ tick();setInterval(tick,1000);
     <a href="${a.l}" target="_blank" rel="noopener" class="att">
       <div class="att-img"><img src="${a.img}" alt="${a.t}" loading="lazy"><span class="att-bdg">${a.b}</span></div>
       <div class="att-body">
+        <svg class="att-ico"><use href="#${a.ico}"/></svg>
         <div class="att-tit">${a.t}</div>
-        <div class="att-meta">📍 ${a.p}</div>
+        <div class="att-meta">${a.p}</div>
         <div class="att-desc">${a.d}</div>
         <div class="att-lnk">Ver en Disneyland Paris →</div>
       </div>
